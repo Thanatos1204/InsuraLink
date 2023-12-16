@@ -63,49 +63,53 @@ const BrokerDashboard = () => {
 
   return (<>
     <Navbar></Navbar>
-    <div className='flex w-screen justify-around items-center gap-10'>
+    <div className='w-screen flex  justify-center items-center h-full py-5'>
+    <div className='flex flex-col justify-center items-center gap-10 w-1/2 h-full'>
         
       
       {/* Statistics */}      
       
-            <div className="flex flex-col gap-5">
+            <div className="flex gap-5 w-full h-full">
                 <div className="backdrop-blur w-1/2 text-white bg-black/30 p-4 rounded-md shadow">
                 <h2 className="text-lg font-semibold">Client Conversion Rate</h2>
                 <p className="text-6xl py-6 font-bold">{clientConversionRate}%</p>
                 </div>
-
-                
-                <div className="backdrop-blur w-1/2 text-white bg-black/30  p-4 rounded-md shadow">
-                <h2 className="text-lg font-semibold">Number of Clients</h2>
-                <p className="text-6xl py-6 font-bold">{numberOfClients}</p>
-                </div>
-
-
-                <div className="backdrop-blur w-1/2 text-white bg-black/30 p-4 rounded-md shadow">
-                <h2 className="text-lg font-semibold">Number of Insurance Companies</h2>
-                <p className="text-6xl py-6 font-bold">{numberOfInsuranceCompanies}</p>
-                </div>  
-                
-            </div>
-    
-            <div className='flex flex-col gap-5 px-5 w-1/2 h-1/2'>
-            
-
                 <div className="backdrop-blur w-3/4 text-white bg-black/30 p-4 rounded-md shadow">
                 <h2 className="text-lg font-semibold">Conversion Rate per Time</h2>
                     <Line data={linechartData} options={chartOptions} />
                 </div>
-
+                </div>
+                <div className="flex w-full gap-5 h-full" >
+                <div className="backdrop-blur w-1/2 text-white bg-black/30  p-4 rounded-md shadow">
+                <h2 className="text-lg font-semibold">Number of Clients</h2>
+                <p className="text-6xl py-6 font-bold">{numberOfClients}</p>
+                </div>
                 <div className="backdrop-blur w-3/4 text-white bg-black/30 p-4 rounded-md shadow">
                 <h2 className="text-lg font-semibold">Converted Clients</h2>
                 <Doughnut data={doughnutChartData} />         
-                </div>    
-
+                </div>  
+                </div>
+            <div className="flex gap-5 w-full h-full">
+                <div className="backdrop-blur w-1/2 text-white bg-black/30 p-4 rounded-md shadow">
+                <h2 className="text-lg font-semibold">Number of Insurance Companies</h2>
+                <p className="text-6xl py-6 font-bold">{numberOfInsuranceCompanies}</p>
+                </div>  
                 <div className="backdrop-blur w-3/4 text-white bg-black/30 p-4 rounded-md shadow">
                 <h2 className="text-lg font-semibold">Clients per Insurance Company</h2>
                 <Bar data={barChartData} />
                 </div>
-            </div>   
+            </div>
+            </div>
+    
+            {/* <div className='flex flex-col gap-5 px-5 w-1/2 h-full'>
+            
+
+               
+
+                 
+
+
+            </div>    */}
     </div>
     
     </>

@@ -10,6 +10,7 @@ export default function signup(){
     const Router = useRouter();
     const [email,setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [role, setRole] = useState("");
     const { user, googleSignIn, logOut, register } = UserAuth();
     const [loading, setLoading] = useState(true);
 
@@ -71,8 +72,13 @@ export default function signup(){
                    <input type="password" class="input-field" required value={password} onChange={(event) => setPassword(event.currentTarget.value)} placeholder="Password"/>
                    <i class="bx bx-lock-alt"></i>
                </div>
+              
 
-           </div>    
+           </div> 
+           <div className={styles.inputbox}>
+                   <input type="text" class="input-field" placeholder="Role" required value={role} onChange={(event) => setRole(event.currentTarget.value)} />
+                   <i class="bx bx-envelope"></i>
+               </div>   
            <div className={styles.inputbox}>
                <input type="submit" class="submit" onClick={handleSignIn} onSubmit={handleSignIn} value="Sign In with Google"/>
                <input type="submit" class="submit" onClick={regi} onSubmit={regi} value="Register"/>   
