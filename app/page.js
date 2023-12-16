@@ -1,5 +1,6 @@
 'use client'
 import React from "react";
+import { useState, useEffect } from "react";
 import { UserAuth } from "./context/AuthContext.js";
 import './landing.css'
 import Image from "next/image.js";
@@ -14,9 +15,12 @@ import 'swiper/css/navigation';
 
 // import required modules
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+import { useRouter } from "next/navigation.js";
 
 
 export default function Home() {
+
+  const Router = useRouter();
 
   const {  user,logOut, upload } = UserAuth();
 
@@ -28,6 +32,34 @@ export default function Home() {
     }
 };
 
+  const [shouldReload, setShouldReload] = useState(false);
+
+    // useEffect(() => {
+    //   console.log("I AM INSIDE");
+    //   // Check if the page has been visited before by checking local storage
+    //   const hasVisited = localStorage.getItem('hasVisited');
+
+    //   // If the page has not been visited, set the flag in local storage and reload
+    //   if (!hasVisited) {
+    //     localStorage.setItem('hasVisited', 'true');
+    //     setShouldReload(true);
+    //   }
+    // }, []);
+
+    // useEffect(()=>{
+    //   location.reload();
+    //   console.log("HELLO");
+    // },[])
+
+    useEffect(()=>{
+      if(user){
+      Router.refresh();
+    }
+    },[user])
+
+  
+    
+
 const testUpload = () =>{
   const res = upload();
   if(res){
@@ -35,11 +67,13 @@ const testUpload = () =>{
   }
 }
 
+
+
   return (
     <main className="p-4">
       
-      {/* <button onClick={handleSignOut}>Sign Out</button>
-      <button onClick={testUpload}>Upload Test Data</button> */}
+       {/* <button onClick={handleSignOut}>Sign Out</button>
+      <button onClick={testUpload}>Upload Test Data</button>  */}
       <div className='landingpage'>
        <header>
             <a class="logo" href="/">Insure</a>

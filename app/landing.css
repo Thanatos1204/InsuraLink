@@ -1,3 +1,6 @@
+*{
+  font-family: "Montserrat", sans-serif;
+}
 .btn1{
     color: #fff;
     border-radius: 105px;
@@ -61,7 +64,7 @@ header {
     width: 50%;
   }
   .sideimg .backgroundimg .landerimg{
-    heigth:10%;
+    height:10%;
     
   
     
@@ -107,7 +110,7 @@ line-height: 150%;
   }
   .clienttype .title{
     color: #09384D;
-font-family: Recoleta;
+
 font-size: 30px;
 font-style: normal;
 font-weight: 700;
@@ -117,7 +120,7 @@ line-height: 45px;
 width: 60%;
 color: #09384D;
 
-font-family: Urbanist;
+
 font-size: 20px;
 font-style: normal;
 font-weight: 400;
@@ -142,7 +145,7 @@ line-height: 150%;
   .landcard h5{
     color: #1E1E1E;
 
-    font-family: Urbanist;
+    
     font-size: 20px;
     font-style: normal;
     font-weight: 700;
@@ -151,7 +154,7 @@ line-height: 150%;
   .landcard p{
     color: #828282;
 
-font-family: Urbanist;
+
 font-size: 20px;
 font-style: normal;
 font-weight: 400;
@@ -163,7 +166,7 @@ line-height: 150%;
   }
   .landcard:hover h5{
     color: #FFF;
-font-family: Urbanist;
+
 font-size: 20px;
 font-style: normal;
 font-weight: 700;
@@ -172,7 +175,7 @@ line-height: 150%;
 
   .landcard:hover p{
     color: #FDFDFD;
-font-family: Urbanist;
+
 font-size: 20px;
 font-style: normal;
 font-weight: 400;
@@ -217,7 +220,7 @@ line-height: 150%;
   
     color: #09384D;
     
-    font-family: Urbanist;
+   
     font-size: 20px;
     font-style: normal;
     font-weight: 700;
@@ -234,7 +237,7 @@ line-height: 150%;
   .swiper-slide .card span{
     color: #828282;
 
-    font-family: Urbanist;
+  
     font-size: 20px;
     font-style: normal;
     font-weight: 700;
@@ -243,7 +246,7 @@ line-height: 150%;
   .swiper-slide .card p{
     color: #828282;
 margin-right: 0;
-font-family: Urbanist;
+
 font-size: 20px;
 font-style: normal;
 font-weight: 200;
@@ -255,7 +258,7 @@ font-weight: 200;
     color: #FFF;
 
 text-align: center;
-font-family: Recoleta;
+
 font-size: 40px;
 font-style: normal;
 font-weight: 700;

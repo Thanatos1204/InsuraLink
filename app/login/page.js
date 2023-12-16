@@ -4,6 +4,7 @@ import styles from '../css/loginsignup.css'
 import { UserAuth } from "../context/AuthContext";
 import { useState,useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { redirect } from "next/navigation";
 import Link from "next/link";
 import toast, { Toaster } from 'react-hot-toast';
 
@@ -30,8 +31,8 @@ export default function login(){
         try{
            const response = await login(email,password);
            console.log('Tried');
-           if(response){
-            Router.push('/');
+           if(response){            
+            
            }            
         }catch(error){
         
@@ -47,7 +48,7 @@ export default function login(){
         };
         checkAuthentication();
         if(loading == false){
-            Router.push('/');
+            window.location.href='/';
         }
     }, [user]);
 

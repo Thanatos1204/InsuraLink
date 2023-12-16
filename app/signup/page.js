@@ -5,10 +5,6 @@ import { UserAuth } from "../context/AuthContext";
 import { useState,useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
-
-
-
-
 export default function signup(){
 
     const Router = useRouter();
@@ -29,8 +25,7 @@ export default function signup(){
     e.preventDefault();
         try{
             await register(email,password);
-            Router.push('/');
-            
+            Router.push('/');            
         }catch(error){
           
             console.log(error);
