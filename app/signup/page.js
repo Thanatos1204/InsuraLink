@@ -16,17 +16,18 @@ export default function signup(){
 
     const handleSignIn = async () => {
         try {
-        await googleSignIn();
+        await googleSignIn(role);
+        window.location.href='/';
         } catch (error) {
         console.log(error);
         }
     };
 
-   async function regi(e){
+    async function regi(e){
     e.preventDefault();
         try{
-            await register(email,password);
-            Router.push('/');            
+            await register(email,password,role);
+            window.location.href='/';            
         }catch(error){
           
             console.log(error);

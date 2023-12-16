@@ -18,18 +18,52 @@ const AuthContext = createContext();
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-  const googleSignIn = () => {
+  const googleSignIn = async (Role) => {
     const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider);
+     signInWithPopup(auth, provider);
+    // if(userCredential && userCredential.user){
+    //   const docRef = await addDoc(collection(db,"users"),{
+    //     Role: Role,        
+    // });
+    // console.log("ID: ",docRef.id)
+    // }
   };
 
-  const register = (email,password) =>{
+  // const register = async (email,password,Role) =>{
+  //   try{
+  //     createUserWithEmailAndPassword(auth, email, password);
+
+      
+  //       console.log("I AM IN!!!!!!!!!!!!");
+  //       const docRef = await addDoc(collection(db,"users"),{
+  //         Role: Role,        
+  //     });
+  //     console.log("ID: ",docRef.id)
+      
+  //   }catch(error){
+  //     console.log(error);
+  //   }
+  //     return userCredential;
+
+  // };
+
+   async function register(email,password,role){
+    try {
+      console.log("BEFOE REGISTER!!!!!!")
+         const res = await createUserWithEmailAndPassword(auth, email, password);
+         console.log("AFTER REGISTER!!!!!!")
+           const docRef = await addDoc(collection(db,"users"),{
+                Role: role                
+            });
+            console.log("ID: ",docRef.id)
+            console.log("AFTER DB!!!!!!")
+            return res;
+        
+    } catch (error) {
+        console.log(error);
+    }
     
-      const userCredential = createUserWithEmailAndPassword(auth, email, password);
-
-      return userCredential;
-
-  };
+}
 
   function secretkey(){
     const  key = crypto.randomBytes(32);
@@ -53,9 +87,9 @@ export const AuthContextProvider = ({ children }) => {
   }
 
  
-  const login = (email,password)=>{
+  const login = async(email,password,Role)=>{
      const res = signInWithEmailAndPassword(auth,email,password);
-
+     
      return res;
   }
 

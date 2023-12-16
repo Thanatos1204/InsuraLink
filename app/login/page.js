@@ -30,7 +30,7 @@ export default function login(){
     const logIn = async(e) =>{
         e.preventDefault();
         try{
-           const response = await login(email,password);
+           const response = await login(email,password,role);
            console.log('Tried');
            if(response){            
             
