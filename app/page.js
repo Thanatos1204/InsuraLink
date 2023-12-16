@@ -56,6 +56,16 @@ const printUser = ()=>{
     // },[])
 
     useEffect(()=>{
+      window.__be = window.__be || {};
+        window.__be.id = "657e28994ae6bc0007819a8b";
+
+        const be = document.createElement('script');
+        be.type = 'text/javascript'; 
+        be.async = true;
+        be.src = ('https:' === document.location.protocol ? 'https://' : 'http://') + 'cdn.chatbot.com/widget/plugin.js';
+
+        const s = document.getElementsByTagName('script')[0]; 
+        s.parentNode.insertBefore(be, s);
       if(user){
       Router.refresh();
     }
@@ -187,6 +197,7 @@ Insured+ accessible</p><p className="subtitle">We believe that insurance should 
         </div>
         <Footer/>
     </div>
+    <noscript>You need to <a href="https://www.chatbot.com/help/chat-widget/enable-javascript-in-your-browser/" rel="noopener nofollow">enable JavaScript</a> in order to use the AI chatbot tool powered by <a href="https://www.chatbot.com/" rel="noopener nofollow" target="_blank">ChatBot</a></noscript>
     </main>
   )
 }

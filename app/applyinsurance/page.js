@@ -2,8 +2,7 @@
 
 import React, { useState } from 'react'
 import './applyinsurance.css'
-import { fsync } from 'fs'
-import crypto from "crypto";
+
 
 function Applyinsurance() {
    const[firstname,setFirstname]=useState()
@@ -169,6 +168,10 @@ function Applyinsurance() {
   </form>
 
         </section>
+    
+
+     
+
     </div>
   )
 }
