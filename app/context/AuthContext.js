@@ -7,7 +7,11 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+import { collection, addDoc } from "firebase/firestore"; 
 import { auth } from "../firebase";
+import { db } from "../firebase";
+import fernet from "fernet";
+import crypto from "crypto";
 
 const AuthContext = createContext();
 
@@ -26,6 +30,27 @@ export const AuthContextProvider = ({ children }) => {
       return userCredential;
 
   };
+
+  function secretkey(){
+    const  key = crypto.randomBytes(32);
+    var secret = new fernet.Secret(key.toString('base64'));
+    console.log(secret.key);
+    return secret.signingKeyHex;    
+  }
+
+  const upload = async(key) =>{
+    key = secretkey();
+    try {
+      const docRef = await addDoc(collection(db, "Details"), {
+        broker_address: "0x00000",
+        key: key,
+        user_address: "0x000001"
+      });
+      console.log("Document written with ID: ", docRef.id);
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+  }
 
  
   const login = (email,password)=>{
@@ -46,7 +71,7 @@ export const AuthContextProvider = ({ children }) => {
   }, [user]);
 
   return (
-    <AuthContext.Provider value={{ user, googleSignIn, logOut,register,login}}>
+    <AuthContext.Provider value={{ user, googleSignIn, logOut,register,login,upload}}>
       {children}
     </AuthContext.Provider>
   );
