@@ -1,0 +1,342 @@
+
+.applyinsurance{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10%;
+    background-color: #1EA887;
+    width: 100%;
+  }
+  
+  .logo {
+    color: #09384D;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  
+  .nav__links a,
+  .cta,
+  .overlay__content a {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    color: #09384D;
+    text-decoration: none;
+  }
+  
+  .nav__links {
+    list-style: none;
+    display: flex;
+  }
+  
+  .nav__links li {
+    padding: 0px 20px;
+  }
+  
+  .nav__links li a {
+    transition: color 0.3s ease 0s;
+  }
+  
+  .nav__links li a:hover {
+    color: #0088a9;
+  }
+ /* 64ac15 */
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+.applyinsurance section{
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.applyinsurance input,
+input[type="radio"] + label,
+input[type="checkbox"] + label:before,
+select option,
+select {
+  width: 100%;
+  padding: 1em;
+  line-height: 1.4;
+  background-color: #f9f9f9;
+  border: 1px solid #e5e5e5;
+  border-radius: 3px;
+  -webkit-transition: 0.35s ease-in-out;
+  -moz-transition: 0.35s ease-in-out;
+  -o-transition: 0.35s ease-in-out;
+  transition: 0.35s ease-in-out;
+  transition: all 0.35s ease-in-out;
+}
+.applyinsurance input:focus {
+  outline: 0;
+  border-color: #09384D;
+}
+.applyinsurance input:focus + .input-icon i {
+  color: #09384D;
+}
+.applyinsurance input:focus + .input-icon:after {
+  border-right-color: #09384D;
+}
+.applyinsurance input[type="radio"] {
+  display: none;
+}
+.applyinsurance input[type="radio"] + label,
+select {
+  display: inline-block;
+  width: 50%;
+  text-align: center;
+  float: left;
+  border-radius: 0;
+}
+.applyinsurance input[type="radio"] + label:first-of-type {
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.applyinsurance input[type="radio"] + label:last-of-type {
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+.applyinsurance input[type="radio"] + label i {
+  padding-right: 0.4em;
+}
+.applyinsurance input[type="radio"]:checked + label,
+input:checked + label:before,
+select:focus,
+select:active {
+  background-color: #f0a500;
+  color: #fff;
+  border-color: #bd8200;
+}
+.applyinsurance input[type="checkbox"] {
+  display: none;
+}
+.applyinsurance input[type="checkbox"] + label {
+  position: relative;
+  display: block;
+  padding-left: 1.6em;
+}
+.applyinsurance input[type="checkbox"] + label:before {
+  position: absolute;
+  top: 0.2em;
+  left: 0;
+  display: block;
+  width: 1em;
+  height: 1em;
+  padding: 0;
+  content: "";
+}
+.applyinsurance input[type="checkbox"] + label:after {
+  position: absolute;
+  top: 0.45em;
+  left: 0.2em;
+  font-size: 0.8em;
+  color: #fff;
+  opacity: 0;
+  font-family: FontAwesome;
+  content: "\f00c";
+}
+.applyinsurance input:checked + label:after {
+  opacity: 1;
+}
+.applyinsurance select {
+  height: 3.4em;
+  line-height: 2;
+}
+.applyinsurance select:first-of-type {
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.applyinsurance select:last-of-type {
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+.applyinsurance select:focus,
+select:active {
+  outline: 0;
+}
+.applyinsurance select option {
+  background-color: #f0a500;
+  color: #fff;
+}
+.applyinsurance .input-group {
+  margin-bottom: 1em;
+  zoom: 1;
+}
+.applyinsurance .input-group:before,
+.input-group:after {
+  content: "";
+  display: table;
+}
+.applyinsurance .input-group:after {
+  clear: both;
+}
+.applyinsurance .input-group-icon {
+  position: relative;
+}
+.applyinsurance .input-group-icon input {
+  padding-left: 4.4em;
+}
+.applyinsurance .input-group-icon .input-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3.4em;
+  height: 3.4em;
+  line-height: 3.4em;
+  text-align: center;
+  pointer-events: none;
+}
+.applyinsurance .input-group-icon .input-icon:after {
+  position: absolute;
+  top: 0.6em;
+  bottom: 0.6em;
+  left: 3.4em;
+  display: block;
+  border-right: 1px solid #e5e5e5;
+  content: "";
+  -webkit-transition: 0.35s ease-in-out;
+  -moz-transition: 0.35s ease-in-out;
+  -o-transition: 0.35s ease-in-out;
+  transition: 0.35s ease-in-out;
+  transition: all 0.35s ease-in-out;
+}
+.applyinsurance .input-group-icon .input-icon i {
+  -webkit-transition: 0.35s ease-in-out;
+  -moz-transition: 0.35s ease-in-out;
+  -o-transition: 0.35s ease-in-out;
+  transition: 0.35s ease-in-out;
+  transition: all 0.35s ease-in-out;
+}
+.applyinsurance .container {
+  max-width: 38em;
+  padding: 1em 3em 2em 3em;
+  margin: 0em auto;
+  background-color: #fff;
+  border-radius: 4.2px;
+  box-shadow: 0px 3px 10px -2px rgba(0, 0, 0, 0.2);
+}
+.applyinsurance .row {
+  zoom: 1;
+}
+.applyinsurance .row:before,
+.row:after {
+  content: "";
+  display: table;
+}
+.row:after {
+  clear: both;
+}
+.applyinsurance .col-half {
+  padding-right: 10px;
+  float: left;
+  width: 50%;
+}
+.applyinsurance .col-half:last-of-type {
+  padding-right: 0;
+}
+.applyinsurance .col-third {
+  padding-right: 10px;
+  float: left;
+  width: 33.33333333%;
+}
+.applyinsurance .col-third:last-of-type {
+  padding-right: 0;
+}
+@media only screen and (max-width: 540px) {
+  .col-half {
+    width: 100%;
+    padding-right: 0;
+  }
+}
+.fileupload{
+    background-color: #efefef;
+    padding: 32px;
+    border-radius: 20px;
+  }
+  
+  .fileupload input[type="file"] {
+    padding: 4px;
+    margin: -4px;
+    position: relative;
+    outline: none;
+  }
+  
+  /* File Selector Button Styles */
+  .fileupload input[type="file"]::file-selector-button {
+    border-radius: 4px;
+    padding: 0 16px;
+    height: 40px;
+    cursor: pointer;
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 0.16);
+    box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.05);
+    margin-right: 16px;
+    width: 132px;
+    color: transparent;
+  }
+  
+  @supports (-moz-appearance: none) {
+    .fileupload input[type="file"]::file-selector-button {
+      color: #1EA887;
+    }
+  }
+  
+  .fileupload input[type="file"]::file-selector-button:hover {
+    background-color: #f3f4f6;
+  }
+  
+  .fileupload input[type="file"]::file-selector-button:active {
+    background-color: #e5e7eb;
+  }
+  
+  /* Faked label styles and icon */
+  .fileupload input[type="file"]::before {
+    position: absolute;
+    pointer-events: none;
+    top: 14px;
+    left: 16px;
+    height: 20px;
+    width: 20px;
+    content: "";
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230964B0'%3E%3Cpath d='M18 15v3H6v-3H4v3c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-3h-2zM7 9l1.41 1.41L11 7.83V16h2V7.83l2.59 2.58L17 9l-5-5-5 5z'/%3E%3C/svg%3E");
+  }
+  
+  .fileupload input[type="file"]::after {
+    position: absolute;
+    pointer-events: none;
+    top: 16px;
+    left: 40px;
+    color: #1EA887;
+    content: "Upload File";
+  }
+  
+  /* Handle Component Focus */
+  .fileupload input[type="file"]:focus-within::file-selector-button,
+  input[type="file"]:focus::file-selector-button {
+    outline: 2px solid #1EA887;;
+    outline-offset: 2px;
+  }
+  
+ .applyinsurance  .btn1{
+  color: #fff;
+  border-radius: 105px;
+background: #1EA887;
+box-shadow: 5px 6px 0px 0px rgba(88, 238, 139, 0.29);
+padding:  16px 40px;
+text-decoration: none;
+font-weight: 700;
+width: fit-content;
+   margin: 20px 20px;
+   border: none;
+ }
