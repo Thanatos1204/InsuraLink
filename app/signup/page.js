@@ -8,10 +8,10 @@ import { useRouter } from 'next/navigation';
 
 
 
+
 export default function signup(){
 
     const Router = useRouter();
-
     const [email,setEmail] = useState("");
     const [password, setPassword] = useState("");
     const { user, googleSignIn, logOut, register } = UserAuth();
@@ -29,7 +29,10 @@ export default function signup(){
     e.preventDefault();
         try{
             await register(email,password);
+            Router.push('/');
+            
         }catch(error){
+          
             console.log(error);
         }
     }
@@ -48,6 +51,7 @@ export default function signup(){
     }, [user]);
 
     return(<>
+       
         <div className={styles.registercontainer} id="register">
            <div className='flex justify-center py-3 text-sm'>
                <span>Have an account? <a href="#" onclick="login()">Login</a></span>                
@@ -72,6 +76,7 @@ export default function signup(){
                    <input type="password" class="input-field" required value={password} onChange={(event) => setPassword(event.currentTarget.value)} placeholder="Password"/>
                    <i class="bx bx-lock-alt"></i>
                </div>
+
            </div>    
            <div className={styles.inputbox}>
                <input type="submit" class="submit" onClick={handleSignIn} onSubmit={handleSignIn} value="Sign In with Google"/>

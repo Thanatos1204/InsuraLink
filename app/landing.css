@@ -1,0 +1,265 @@
+.btn1{
+    color: #fff;
+    border-radius: 105px;
+background: #1EA887;
+box-shadow: 5px 6px 0px 0px rgba(88, 238, 139, 0.29);
+padding:  16px 40px;
+text-decoration: none;
+font-weight: 700;
+width: fit-content;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10%;
+  }
+  
+  .logo {
+    color: #09384D;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  
+  .nav__links a,
+  .cta,
+  .overlay__content a {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    color: #09384D;
+    text-decoration: none;
+  }
+  
+  .nav__links {
+    list-style: none;
+    display: flex;
+  }
+  
+  .nav__links li {
+    padding: 0px 20px;
+  }
+  
+  .nav__links li a {
+    transition: color 0.3s ease 0s;
+  }
+  
+  .nav__links li a:hover {
+    color: #0088a9;
+  }
+
+
+  .bannersection{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    overflow: hidden;
+    height: 80vh;
+  }
+  .sideimg{
+    width: 50%;
+  }
+  .sideimg .backgroundimg .landerimg{
+    heigth:10%;
+    
+  
+    
+  }
+  .sideimg .backgroundimg .mainimg{
+    position: absolute;
+    top: 24%;
+    right: 6%;
+  }
+  .mainimg .pict{
+    width: 50%;
+  }
+  .slogan{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 10%;
+  }
+  .mainslogan{
+    color: #09384D;
+    font-size: 78px;
+    font-weight: 700;
+    line-height: 111%;
+  }
+  .subslogan{
+    color: #09384D;
+
+font-size: 20px;
+font-style: normal;
+font-weight: 400;
+line-height: 150%; 
+  }
+
+  .bannersection button{
+    margin: 20px;
+    border: none;
+  }
+  .mainslogan span{
+    color: #1EA887;
+  }
+  .clienttype{
+    margin: 0 15%;
+  }
+  .clienttype .title{
+    color: #09384D;
+font-family: Recoleta;
+font-size: 30px;
+font-style: normal;
+font-weight: 700;
+line-height: 45px;
+  }
+  .clienttype .title .subtitle{
+width: 60%;
+color: #09384D;
+
+font-family: Urbanist;
+font-size: 20px;
+font-style: normal;
+font-weight: 400;
+line-height: 150%;
+  }
+  .landcards{
+    display: flex;
+    border: 1px solid#828282;
+    border-right: none;
+    border-radius: 5px;
+
+  }
+  .landcard{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 30px;
+    border-right: 1px solid#828282;
+    border-radius: 5px;
+    height: 300px;
+  }
+  .landcard h5{
+    color: #1E1E1E;
+
+    font-family: Urbanist;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%; 
+  }
+  .landcard p{
+    color: #828282;
+
+font-family: Urbanist;
+font-size: 20px;
+font-style: normal;
+font-weight: 400;
+line-height: 150%;
+  }
+
+  .landcard:hover{
+    background-color:#1EA887;
+  }
+  .landcard:hover h5{
+    color: #FFF;
+font-family: Urbanist;
+font-size: 20px;
+font-style: normal;
+font-weight: 700;
+line-height: 150%; 
+  }
+
+  .landcard:hover p{
+    color: #FDFDFD;
+font-family: Urbanist;
+font-size: 20px;
+font-style: normal;
+font-weight: 400;
+line-height: 150%;
+  }
+
+  .testimonial{
+    width: 100%;
+    background-color: #1EA887;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+  }
+ 
+  .swiper {
+    width: 300px;
+    height: 300px;
+    border-radius: 10px;
+  }
+  
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    border-radius: 10px;
+    /* Center slide text vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .swiper-slide .card h5{
+  
+    color: #09384D;
+    
+    font-family: Urbanist;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%;
+  }
+  .swiper-slide .card{
+    height: 300px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .swiper-slide .card span{
+    color: #828282;
+
+    font-family: Urbanist;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%;
+  }
+  .swiper-slide .card p{
+    color: #828282;
+margin-right: 0;
+font-family: Urbanist;
+font-size: 20px;
+font-style: normal;
+font-weight: 200;
+
+  }
+
+  .testimonialtext{
+    width: 700px;
+    color: #FFF;
+
+text-align: center;
+font-family: Recoleta;
+font-size: 40px;
+font-style: normal;
+font-weight: 700;
+line-height: 45px;
+  }
+  
+  

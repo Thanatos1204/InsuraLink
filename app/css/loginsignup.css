@@ -241,3 +241,6 @@ body{
         gap: 0;
     }
 }
+.dropdown{
+    margin: 20px 30px;
+}

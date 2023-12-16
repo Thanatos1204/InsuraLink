@@ -4,6 +4,8 @@ import styles from '../css/loginsignup.css'
 import { UserAuth } from "../context/AuthContext";
 import { useState,useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from "next/link";
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function login(){
 
@@ -32,6 +34,7 @@ export default function login(){
             Router.push('/');
            }            
         }catch(error){
+        
             console.log(error);
         }
         
@@ -49,9 +52,13 @@ export default function login(){
     }, [user]);
 
     return(<>
+    <Toaster style= {
+      {overflow: 'hidden',
+      height: '30px',}
+    }/>
         <div className={styles.logincontainer} id="login">
             <div className='flex justify-center py-3 text-sm'>
-                <span>Don't have an account? <a href="#" onclick="register()">Sign Up</a></span>                
+                <span>Don't have an account? <Link href="/signup">Sign Up</Link></span>                
             </div>
             <header className='text-center text-5xl pb-5'>Login</header>
             <div className={styles.inputbox}>
