@@ -11,7 +11,7 @@ export default function signup(){
     const [email,setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [role, setRole] = useState("");
-    const { user, googleSignIn, logOut, register } = UserAuth();
+    const { user, googleSignIn, logOut, register , fetchDocumentId } = UserAuth();
     const [loading, setLoading] = useState(true);
 
     const handleSignIn = async () => {
@@ -22,6 +22,8 @@ export default function signup(){
         console.log(error);
         }
     };
+
+   
 
     async function regi(e){
     e.preventDefault();
@@ -48,7 +50,7 @@ export default function signup(){
     }, [user]);
 
     return(<>
-       
+      
         <div className={styles.registercontainer} id="register">
            <div className='flex justify-center py-3 text-sm'>
                <span>Have an account? <a href="#" onclick="login()">Login</a></span>                

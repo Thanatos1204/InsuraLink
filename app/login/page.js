@@ -14,7 +14,7 @@ export default function login(){
 
     const [email,setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const { user, googleSignIn, logOut, login } = UserAuth();
+    const { user, googleSignIn, logOut, login, fetchRole, roler } = UserAuth();
     const [loading, setLoading] = useState(true);
     const [role, setRole] = useState("");
 
@@ -30,10 +30,16 @@ export default function login(){
     const logIn = async(e) =>{
         e.preventDefault();
         try{
-           const response = await login(email,password,role);
+           const response = await login(email,password);
            console.log('Tried');
-           if(response){            
-            
+           await fetchRole(email);
+           if(roler == role){            
+            console.log('Success');
+            if(roler == 'broker'){
+                window.location.href = '/brokerdashboard';
+            }else{
+                window.location.href = '/insurancedashboard';
+            }
            }            
         }catch(error){
         
@@ -42,18 +48,30 @@ export default function login(){
         
     }
 
+    const fetchData = async(e) =>{
+        e.preventDefault();
+        try{
+           const rol =  await fetchRole(email);            
+            console.log(roler);
+        }catch(error){
+            console.log(error);
+        }
+    }
+
     useEffect(() => {
         const checkAuthentication = async () => {
         await new Promise((resolve) => setTimeout(resolve, 50));
         setLoading(false);
         };
         checkAuthentication();
-        if(loading == false){
-            window.location.href='/';
-        }
+        // if(loading == false){
+        //     window.location.href='/';
+        // }
     }, [user]);
 
     return(<>
+
+    <button onClick={fetchData}> PRINT PRINT </button>
     <Toaster style= {
       {overflow: 'hidden',
       height: '30px',}

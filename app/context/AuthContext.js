@@ -7,8 +7,10 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { collection, addDoc } from "firebase/firestore"; 
+import { collection, addDoc } from "firebase/firestore";
+import { getDocs } from "firebase/firestore";  
 import { auth } from "../firebase";
+// import { db } from 'firebase/firestore';
 import { db } from "../firebase";
 import fernet from "fernet";
 import crypto from "crypto";
@@ -17,6 +19,7 @@ const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [roler, setRoler] = useState("");
 
   const googleSignIn = async (Role) => {
     const provider = new GoogleAuthProvider();
@@ -47,13 +50,14 @@ export const AuthContextProvider = ({ children }) => {
 
   // };
 
-   async function register(email,password,role){
+   async function register(email,password,role){    
     try {
       console.log("BEFOE REGISTER!!!!!!")
-         const res = await createUserWithEmailAndPassword(auth, email, password);
-         console.log("AFTER REGISTER!!!!!!")
+         const res = await createUserWithEmailAndPassword(auth, email, password);  
+         console.log("After REGISTER!!!!!!")
            const docRef = await addDoc(collection(db,"users"),{
-                Role: role                
+                Role: role,
+                Email: email                
             });
             console.log("ID: ",docRef.id)
             console.log("AFTER DB!!!!!!")
@@ -63,6 +67,21 @@ export const AuthContextProvider = ({ children }) => {
         console.log(error);
     }
     
+}
+
+async function fetchRole(email){
+  try{
+    const querySnapshot = await getDocs(collection(db, "users"));
+    querySnapshot.forEach((doc)=>{
+      if(doc.data().Email == email){
+       setRoler(doc.data().Role);   
+       return roler;   
+      }
+      
+    })
+  }catch(error){
+    console.log(error);
+  }
 }
 
   function secretkey(){
@@ -87,11 +106,10 @@ export const AuthContextProvider = ({ children }) => {
   }
 
  
-  const login = async(email,password,Role)=>{
-     const res = signInWithEmailAndPassword(auth,email,password);
-     
-     return res;
-  }
+  const login = async(email,password)=>{
+     const res = signInWithEmailAndPassword(auth,email,password); 
+     return res;    
+  } 
 
   const logOut = () => {
     signOut(auth);
@@ -103,14 +121,16 @@ export const AuthContextProvider = ({ children }) => {
     });
     return () => unsubscribe();
   }, [user]);
+  
 
   return (
-    <AuthContext.Provider value={{ user, googleSignIn, logOut,register,login,upload}}>
+    <AuthContext.Provider value={{ user, googleSignIn, logOut,register,login,upload,fetchRole,roler}}>
       {children}
     </AuthContext.Provider>
   );
-};
 
-export const UserAuth = () => {
-  return useContext(AuthContext);
+  
 };
+  export const UserAuth = () => {
+  return useContext(AuthContext);
+}

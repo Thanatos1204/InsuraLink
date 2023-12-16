@@ -22,7 +22,7 @@ export default function Home() {
 
   const Router = useRouter();
 
-  const {  user,logOut, upload } = UserAuth();
+  const {  user,logOut, upload, fetchDocumentId } = UserAuth();
 
   const handleSignOut = async () => {
     try {
@@ -31,6 +31,10 @@ export default function Home() {
     console.log(error);
     }
 };
+
+const printUser = ()=>{
+  fetchDocumentId();
+}
 
   const [shouldReload, setShouldReload] = useState(false);
 
@@ -72,8 +76,8 @@ const testUpload = () =>{
   return (
     <main className="p-4">
       
-       {/* <button onClick={handleSignOut}>Sign Out</button>
-      <button onClick={testUpload}>Upload Test Data</button>  */}
+        <button onClick={printUser}>PRINT PRINT</button>
+      <button onClick={testUpload}>Upload Test Data</button>  
       <div className='landingpage'>
        <header>
             <a class="logo" href="/">Insure</a>

@@ -6,21 +6,20 @@ import {
   faBell
 } from "@fortawesome/free-solid-svg-icons";
 
-
-
-const Navbar = () => {
+const Inavbar = () => {
   return (
-    <nav className="bg-[#1EA887] w-screen h-min">
+    <div>
+      <nav className="bg-[#1EA887] w-screen h-min">
       <div className="container flex items-center justify-between">
         <div className='flex items-center justify-between py-2 w-1/5'>             
             <Link href="/">
             <h1 className="text-white text-lg font-semibold px-4">InsuraLink</h1>
             </Link>           
-            <p className="text-white px-4">Welcome BROKER {/*{user.name}*/}</p>
-            <Link href='/brokerdashboard'>
+            <p className="text-white px-4">Welcome INSURANCE AGENT! {/*{user.name}*/}</p>
+            <Link href='/insurancedashboard'>
             <p className="text-white px-4">Dashboard</p>
             </Link>
-            <Link href='/brokerclients'>
+            <Link href='/insuranceclients'>
             <p className="text-white px-4">Clients</p>
             </Link>
         </div>
@@ -34,8 +33,8 @@ const Navbar = () => {
         </div>   
       </div>
     </nav>
-  );
-  
+    </div>
+  )
 }
 
-export default Navbar
+export default Inavbar
