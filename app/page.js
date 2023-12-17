@@ -86,11 +86,11 @@ const testUpload = () =>{
   return (
     <main className="p-4">
       
-        <button onClick={printUser}>PRINT PRINT</button>
-      <button onClick={testUpload}>Upload Test Data</button>  
+        {/* <button onClick={printUser}>PRINT PRINT</button>*/
+     <button onClick={testUpload}>Upload Test Data</button>  }
       <div className='landingpage'>
        <header>
-            <a class="logo" href="/">Insure</a>
+            <a class="logo" href="/">InsuraLink</a>
             <nav>
                 <ul class="nav__links">
                     <li><a href="#">Services</a></li>

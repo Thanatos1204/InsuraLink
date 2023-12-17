@@ -19,6 +19,7 @@ const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [userRef, setUserRef] = useState("");
   const [roler, setRoler] = useState("");
 
   const googleSignIn = async (Role) => {
@@ -50,16 +51,41 @@ export const AuthContextProvider = ({ children }) => {
 
   // };
 
+  function secretkey(){
+    const  key = crypto.randomBytes(32);
+    var secret = new fernet.Secret(key.toString('base64'));
+    console.log(secret.key);
+    return secret.signingKeyHex;    
+  }
+
+
+  const upload = async() =>{
+    const key = secretkey();
+    try {
+      const docRef = await addDoc(collection(db, "Details"), {
+        broker_address: "0x00000",
+        key: key,
+        user_address: "0x000001"
+      });
+      console.log("Document written with ID: ", docRef.id);
+      setUserRef(docRef.id);
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+  }
+
    async function register(email,password,role){    
     try {
       console.log("BEFOE REGISTER!!!!!!")
-         const res = await createUserWithEmailAndPassword(auth, email, password);  
+         const res = await createUserWithEmailAndPassword(auth, email, password);
+         const resp = await upload();  
          console.log("After REGISTER!!!!!!")
            const docRef = await addDoc(collection(db,"users"),{
                 Role: role,
                 Email: email                
             });
             console.log("ID: ",docRef.id)
+
             console.log("AFTER DB!!!!!!")
             return res;
         
@@ -84,26 +110,8 @@ async function fetchRole(email){
   }
 }
 
-  function secretkey(){
-    const  key = crypto.randomBytes(32);
-    var secret = new fernet.Secret(key.toString('base64'));
-    console.log(secret.key);
-    return secret.signingKeyHex;    
-  }
-
-  const upload = async(key) =>{
-    key = secretkey();
-    try {
-      const docRef = await addDoc(collection(db, "Details"), {
-        broker_address: "0x00000",
-        key: key,
-        user_address: "0x000001"
-      });
-      console.log("Document written with ID: ", docRef.id);
-    } catch (e) {
-      console.error("Error adding document: ", e);
-    }
-  }
+ 
+  
 
  
   const login = async(email,password)=>{
@@ -124,7 +132,7 @@ async function fetchRole(email){
   
 
   return (
-    <AuthContext.Provider value={{ user, googleSignIn, logOut,register,login,upload,fetchRole,roler}}>
+    <AuthContext.Provider value={{ user, googleSignIn, logOut,register,login,upload,fetchRole,roler,userRef}}>
       {children}
     </AuthContext.Provider>
   );
