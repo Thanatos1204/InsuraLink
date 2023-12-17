@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import './applyinsurance.css'
+import toast, { Toaster } from 'react-hot-toast';
 
 
 function Applyinsurance() {
@@ -32,6 +33,8 @@ function Applyinsurance() {
     
   };
       const body = {
+      useRef:'JVuuma0mzMuiGh2bdH5g',
+      jsonData:  {
         "firstname":firstname,
       "email":email,
       "lastname":Lastname,
@@ -43,9 +46,13 @@ function Applyinsurance() {
       "Maratial":martial,
       "State":indstate,
       "Occupation":occupation,
-      "pdf":pdf
+      "pdf":pdf,
+      "visibility":true
     }
-    console.log(body)
+    }
+
+    const res = await axios.post('https://mumbaihacks-alisdej34q-uc.a.run.app/adduserdetails',{body});
+    toast.success('User Successfully Applied for Insurance');
      
     }
     catch(err){
@@ -58,11 +65,13 @@ function Applyinsurance() {
 
   return (
     <div className='applyinsurance'>
+      <Toaster/>
       <head>
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"/>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
       </head>
       <header>
+            
             <a class="logo" href="/">Insure</a>
             <nav>
                 <ul class="nav__links">
