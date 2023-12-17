@@ -1,0 +1,30 @@
+{
+  "name": "insuralink",
+  "description": "Simple hello world sample in Node",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "dependencies": {
+    "2d": "^0.0.0",
+    "axios": "^1.6.2",
+    "canvas": "^2.11.2",
+    "childprocess": "^2.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "ethers": "^6.9.0",
+    "express": "^4.18.2",
+    "fernet": "^0.4.0",
+    "firebase": "^10.7.1",
+    "form-data": "^4.0.0",
+    "fs": "^0.0.1-security",
+    "sharp": "^0.33.0",
+    "viem": "^1.20.0",
+    "wagmi": "^1.4.12"
+  }
+}
