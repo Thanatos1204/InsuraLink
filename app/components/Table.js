@@ -1,14 +1,17 @@
 // components/BrokerTable.js
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 const BrokerTable = () => {
-  const data = [
+
+  const [d,setd] = useState(
+   [
     {
       id: 1,
       name: 'John Doe',
       docType: 'Aadhar Card',
       clientId: '1234-5678-9012',
       document: 'AadharCard.pdf',
+      visible:true
     },
     {
         id: 2,
@@ -16,13 +19,40 @@ const BrokerTable = () => {
         docType: 'Aadhar Card',
         clientId: '1234-5678-9012',
         document: 'AadharCard.pdf',
+        visible:true
       },
+      {
+        id: 3,
+        name: 'Abraham Linc',
+        docType: 'Aadhar Card',
+        clientId: '1234-5678-9012',
+        document: 'AadharCard.pdf',
+        visible:true
+      },
+      {
+        id: 4,
+        name: 'Mark Katson',
+        docType: 'Aadhar Card',
+        clientId: '1234-5678-9012',
+        document: 'AadharCard.pdf',
+        visible:true
+      }
     
-  ];
+    ])
+ 
+  
+  const handleRemove=(pid)=>{
+    let f=[...d];
+      let index =  f.filter((c)=>(c.id===pid));
+         f.splice(index,1)
+        setd([...f])
+        
+        
+  }
 
   return (
     <div className=" flex justify-around items-center py-10 overflow-x-auto">
-      <table className=" w-10/12 bg-black self-center text-center border border-gray-500">
+      <table className=" w-10/12 bg-#1EA887  color-white self-center text-center border">
         <thead>
           <tr>
             <th className="py-2 px-4 border-b">Client Name</th>
@@ -33,8 +63,8 @@ const BrokerTable = () => {
           </tr>
         </thead>
         <tbody>
-          {data.map((client,index) => (
-            <tr key={client.id} className={index % 2 === 0 ? 'bg-gray-500' : ''}>
+          {  d?.map((client,index) => ( client.visible &&
+            <tr key={client.id}>
               <td className="py-2 px-4 border-b">{client.name}</td>
               <td className="py-2 px-4 border-b">{client.docType}</td>
               <td className="py-2 px-4 border-b">{client.clientId}</td>
@@ -43,12 +73,12 @@ const BrokerTable = () => {
                 <button className="bg-green-500 text-white py-1 px-2 mr-2">
                   Accept
                 </button>
-                <button className="bg-red-500 text-white py-1 px-2">
+                <button className="bg-red-500 text-white py-1 px-2" onClick={()=>(handleRemove(client.id))}>
                   Reject
-                </button>
+                </button >
               </td>
             </tr>
-          ))}
+          )) }
         </tbody>
       </table>
     </div>

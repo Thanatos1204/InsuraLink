@@ -17,7 +17,7 @@ export default function login(){
     const { user, googleSignIn, logOut, login, fetchRole, roler } = UserAuth();
     const [loading, setLoading] = useState(true);
     const [role, setRole] = useState("");
-
+    const [data,setData] = useState("");
 
     const handleSignIn = async () => {
         try {
@@ -26,11 +26,13 @@ export default function login(){
         console.log(error);
         }
     };
+    
 
     const logIn = async(e) =>{
         e.preventDefault();
         try{
            const response = await login(email,password);
+           setData(response);
            console.log('Tried');
            await fetchRole(email);
            if(roler == role){            
@@ -40,21 +42,21 @@ export default function login(){
             }else if(roler == 'insuranceAgent'){
                 window.location.href = '/insurancedashboard';
             }else {
-                window.location.href = '/client';
+                window.location.href = '/applyinsurance';
             }
            }            
         }catch(error){
         
             console.log(error);
         }
-        
+        E
     }
 
     const fetchData = async(e) =>{
         e.preventDefault();
         try{
            const rol =  await fetchRole(email);            
-            console.log(roler);
+            console.log(user);
         }catch(error){
             console.log(error);
         }
@@ -73,15 +75,17 @@ export default function login(){
 
     return(<>
 
-    <button onClick={fetchData}> PRINT PRINT </button>
+ 
     <Toaster style= {
       {overflow: 'hidden',
       height: '30px',}
     }/>
+   
         <div className={styles.logincontainer} id="login">
             <div className='flex justify-center py-3 text-sm'>
                 <span>Don't have an account? <Link href="/signup">Sign Up</Link></span>                
             </div>
+            {console.log(data)}
             <header className='text-center text-5xl pb-5'>Login</header>
             <div className={styles.inputbox}>
                 <input type="text" class="input-field" required value={email} onChange={(event) => setEmail(event.currentTarget.value)}  placeholder="Your Email"/>

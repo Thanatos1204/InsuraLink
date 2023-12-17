@@ -5,7 +5,7 @@ import './applyinsurance.css'
 import Link from 'next/link'
 import { UserAuth } from "../context/AuthContext";
 import { Toaster } from 'react-hot-toast';
-
+import axios from 'axios'
 
 
 function Applyinsurance() {
@@ -40,7 +40,7 @@ function Applyinsurance() {
     
   };
       const body = {
-      useRef: userRef,
+      useRef: '1FMqFXTlu13bN7ySbXKi',
       jsonData:  {
         "firstname":firstname,
       "email":email,
@@ -127,7 +127,7 @@ function Applyinsurance() {
       <div className='row'>
       <div className='col'>
       <div class="input-group input-group-icon">
-        <input type="text" placeholder="Martial Status" value={martial} onChange={(event) => setMartial(event.currentTarget.value)}/>
+        <input type="text" placeholder="Martial Status" value={martial} onChange={(event) => (setMartial(event.currentTarget.value),console.log(userRef))}/>
         <div class="input-icon"><i class="fa fa-user"></i></div>
       </div>
       </div>

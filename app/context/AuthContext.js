@@ -19,7 +19,7 @@ const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [userRef, setUserRef] = useState("");
+  const [userRef, setUserRef] = useState(null);
   const [roler, setRoler] = useState("");
 
   const googleSignIn = async (Role) => {
@@ -102,8 +102,8 @@ const login = async(email,password)=>{
     const querySnapshot = await getDocs(db,"Details");
     querySnapshot.forEach((doc)=>{
       if(doc.data().user_address == email){
-        setUserRef(doc.id);
-        console.log(userRef);
+        console.log(doc.id);
+        // console.log(userRef);
       }
     })
    return res;
