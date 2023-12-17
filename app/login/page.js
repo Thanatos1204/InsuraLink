@@ -37,8 +37,10 @@ export default function login(){
             console.log('Success');
             if(roler == 'broker'){
                 window.location.href = '/brokerdashboard';
-            }else{
+            }else if(roler == 'insuranceAgent'){
                 window.location.href = '/insurancedashboard';
+            }else {
+                window.location.href = '/client';
             }
            }            
         }catch(error){

@@ -3,6 +3,9 @@
 import React, { useState } from 'react'
 import './applyinsurance.css'
 import Link from 'next/link'
+import { UserAuth } from "../context/AuthContext";
+import { Toaster } from 'react-hot-toast';
+
 
 
 function Applyinsurance() {
@@ -26,6 +29,7 @@ function Applyinsurance() {
    
    const handlesubmit=async()=>{
     try{
+      console.log(userRef);
       let imgbase64 = "";
       let reader = new FileReader();
       reader.readAsDataURL(pdfurl);
@@ -36,7 +40,7 @@ function Applyinsurance() {
     
   };
       const body = {
-      useRef:'JVuuma0mzMuiGh2bdH',
+      useRef: userRef,
       jsonData:  {
         "firstname":firstname,
       "email":email,
@@ -55,7 +59,7 @@ function Applyinsurance() {
     }
 
     const res = await axios.post('https://mumbaihacks-alisdej34q-uc.a.run.app/adduserdetails',{body});
-    toast.success('User Successfully Applied for Insurance');
+    Toaster.success('User Successfully Applied for Insurance');
      
     }
     catch(err){

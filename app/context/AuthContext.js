@@ -59,13 +59,13 @@ export const AuthContextProvider = ({ children }) => {
   }
 
 
-  const upload = async() =>{
+  const upload = async(email) =>{
     const key = secretkey();
     try {
       const docRef = await addDoc(collection(db, "Details"), {
         broker_address: "0x00000",
         key: key,
-        user_address: "0x000001"
+        user_address: email
       });
       console.log("Document written with ID: ", docRef.id);
       setUserRef(docRef.id);
@@ -74,11 +74,12 @@ export const AuthContextProvider = ({ children }) => {
     }
   }
 
+  
    async function register(email,password,role){    
     try {
       console.log("BEFOE REGISTER!!!!!!")
          const res = await createUserWithEmailAndPassword(auth, email, password);
-         const resp = await upload();  
+         const resp = await upload(email);  
          console.log("After REGISTER!!!!!!")
            const docRef = await addDoc(collection(db,"users"),{
                 Role: role,
@@ -94,6 +95,23 @@ export const AuthContextProvider = ({ children }) => {
     }
     
 }
+
+const login = async(email,password)=>{
+  try{ 
+    const res = await signInWithEmailAndPassword(auth,email,password);
+    const querySnapshot = await getDocs(db,"Details");
+    querySnapshot.forEach((doc)=>{
+      if(doc.data().user_address == email){
+        setUserRef(doc.id);
+        console.log(userRef);
+      }
+    })
+   return res;
+  }catch(error){
+    console.log(error);
+  }    
+} 
+
 
 async function fetchRole(email){
   try{
@@ -114,10 +132,7 @@ async function fetchRole(email){
   
 
  
-  const login = async(email,password)=>{
-     const res = signInWithEmailAndPassword(auth,email,password); 
-     return res;    
-  } 
+  
 
   const logOut = () => {
     signOut(auth);
