@@ -1,11 +1,11 @@
 const express = require('express');
 const { addUserDetails, fetchUserDetails} = require('./main.js'); // replace with your contract file path
 const cors = require('cors')
-
+ 
 const fs = require('fs');
 const { userInfo } = require('os');
 const FormData = './Data/johndoe.json'
-
+const {deleteFile} = require('./deleteFile.js')
 
 
 const app = express();
@@ -53,24 +53,29 @@ app.post('/getuserdetails', async (req, res) => {
     await fetchUserDetails(useRef);
     // Read the file asynchronously
       
-      fs.readFile(`${useRef}_decrypt.json`, 'utf8', (err, data) => {
+    fs.readFile(`${useRef}_decrypt.json`, (err, data) => {
       if (err) {
-        console.error('Error reading JSON file:', err);
-        res.status(500).send('Error reading JSON file');
+        console.error('Error reading file:', err);
         return;
       }
-
-      // Parse the JSON data
-      const jsonData = JSON.parse(data);
-
-      // Send the JSON data in the response inside the callback
-      res.status(200).json(jsonData);
+    
+      try {
+        // If not specifying encoding, data will be a Buffer
+        const jsonData = JSON.parse(data.toString()); // Convert Buffer to string and parse JSON
+        res.send(200).json(jsonData)
+        // Perform operations with the parsed JSON data
+      } catch (error) {
+        console.error('Error parsing JSON:', error);
+      }
     });
-  } catch (e) {
-    console.log(e);
-    res.status(500).send('Error occurred while processing request');
+  }catch(e){
+    console.log(e)
   }
-});
+    
+}); 
+
+
+
 const port = parseInt(process.env.PORT) || 8080;
 app.listen(port, () => {
   console.log(`helloworld: listening on port ${port}`);
