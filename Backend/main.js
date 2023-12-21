@@ -1,6 +1,6 @@
 
 const ethersFunctions = require('./StoreHashOnChain.js');
-const { storeUserHash, getUserHash, contract, contractAddress, contractABI, connectedWallet, provider, wallet, privateKe } = ethersFunctions;
+const { storeUserHash, getUserHash, getUserCertificateHash,storeUserCertificateHash,contract, contractAddress, contractABI, connectedWallet, provider, wallet, privateKe } = ethersFunctions;
 const { collection, getDocs } = require('firebase/firestore')
 const db = require('./firebase.js')
 const { encryptFile, decryptFile } = require('./EncryptDecrypt.js');
@@ -14,10 +14,11 @@ require('dotenv').config();
 const { JsonRpcProvider } = require('ethers/providers');
 const { downloadFile } = require('./FetchFromIPFS.js')
 const { generateCertificate } = require('./childprocess.js')
-const useRef = 'BIvBbX30qo5DRjz9sqMY'
+const useRef = 'rDrOXPjQ51hQeu5tBXGs'
 const FormData = './Data/johndoe.json'
 // delete a file 
 const { deleteFile } = require('./deleteFile.js');
+const { get } = require('http');
 
 
 async function addUserDetails(useRef, FormData) {
@@ -26,9 +27,12 @@ async function addUserDetails(useRef, FormData) {
     console.log('key fetched from db')
     await encryptFile(FormData, UserKey, `${useRef}.txt`);
     console.log(`file Encrypted with ${useRef}.txt`)
-    const IPFSObject = await pinFileToIPFS(useRef);
-    await storeUserHash(useRef, IPFSObject);
-    await deleteFile(`${useRef}.txt`);
+    if(fs.existsSync(`${useRef}.txt`)){
+        console.log('file exists')
+        const IPFSObject = await pinFileToIPFS(useRef);
+        await storeUserHash(useRef, IPFSObject);
+        await deleteFile(`${useRef}.txt`);
+    }
 
     console.log('creating user..')
 
@@ -44,13 +48,14 @@ async function fetchUserDetails(useRef) {
     
 }
 
-async function genCertificate(name) {
-    await generateCertificate(name)
-    // const imageHash = await pinImageToIPFS(`./Certificates/${name}.jpg`)
-    // console.log(imageHash)
+async function genCertificate(name, useRef) {
+    const certificate = await generateCertificate(name)
+    const imageHash = await pinImageToIPFS(`./Certificates/${name}.jpg`)
+    const store =  storeUserCertificateHash(useRef, imageHash)
+    return imageHash
 }
 
-// genCertificate('Mark Katson')
+// genCertificate('Khushi Vaishya', 'rDrOXPjQ51hQeu5tBXGs')
 
 async function readKey(userRef) {
     const querySnapshot = await getDocs(collection(db, "Details"));
@@ -89,4 +94,4 @@ async function readKey(userRef) {
 
 
 
-module.exports = { addUserDetails, fetchUserDetails, genCertificate } 
+module.exports = {addUserDetails, fetchUserDetails, genCertificate } 

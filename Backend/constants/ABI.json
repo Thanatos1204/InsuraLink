@@ -30,7 +30,7 @@
 				"type": "string"
 			}
 		],
-		"name": "setUserHash",
+		"name": "setUserCertificateHash",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -39,11 +39,47 @@
 		"inputs": [
 			{
 				"internalType": "string",
-				"name": "",
+				"name": "user",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "hash",
 				"type": "string"
 			}
 		],
-		"name": "BrokerToUser",
+		"name": "setUserHash",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "newOwner",
+				"type": "address"
+			}
+		],
+		"name": "transferOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "broker",
+				"type": "string"
+			}
+		],
+		"name": "getBrokerUser",
 		"outputs": [
 			{
 				"internalType": "string",
@@ -58,11 +94,11 @@
 		"inputs": [
 			{
 				"internalType": "string",
-				"name": "broker",
+				"name": "user",
 				"type": "string"
 			}
 		],
-		"name": "getBrokerUser",
+		"name": "getUserCertificateHash",
 		"outputs": [
 			{
 				"internalType": "string",
@@ -93,19 +129,13 @@
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			}
-		],
-		"name": "UserToHash",
+		"inputs": [],
+		"name": "owner",
 		"outputs": [
 			{
-				"internalType": "string",
+				"internalType": "address",
 				"name": "",
-				"type": "string"
+				"type": "address"
 			}
 		],
 		"stateMutability": "view",

@@ -5,17 +5,19 @@ require('dotenv').config()
 
 const JWT = process.env.JWT
 
-const pinFileToIPFS = async (path) => {
+const pinImageToIPFS = async (path) => {
   let hash='';
     const formData = new FormData();
   
-    const src = `${path}.txt`;
+    const src = `${path}`;
     
     const file = await fs.createReadStream(src)
     formData.append('file', file)
     
+    const filename = nameSplitter(path);
+
     const pinataMetadata = JSON.stringify({
-      name: `${path}`,
+      name: filename,
     });
     formData.append('pinataMetadata', pinataMetadata);
     
@@ -35,9 +37,14 @@ const pinFileToIPFS = async (path) => {
       return res.data.IpfsHash;
     } catch (error) {
       console.log(error);
-    }
-
-   
+    }  
 }
 
-module.exports = pinFileToIPFS;
+const nameSplitter = (path) => {
+  const filename = path.split('/').reverse()[0].split('.')[0]
+  console.log(filename)
+  return filename
+}
+
+
+module.exports = pinImageToIPFS;

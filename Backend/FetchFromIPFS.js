@@ -3,9 +3,9 @@ const fs = require('fs');
 
 async function downloadFile(ipfsHash, useRef) {
  const response = await fetch(`https://gateway.pinata.cloud/ipfs/${ipfsHash}`);
- const fileStream = fs.createWriteStream(`${useRef}.txt`);
- response.body.pipe(fileStream);
- return new Promise((resolve, reject) => {
+ const fileStream = await fs.createWriteStream(`${useRef}.txt`);
+ await response.body.pipe(fileStream);
+ return new Promise(async (resolve, reject) => {
    response.body.on('error', (err) => {
      fileStream.close();
      reject(err);

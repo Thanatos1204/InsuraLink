@@ -22,7 +22,8 @@ const { JsonRpcProvider } = require('ethers/providers');
     const contractABI = JSON.parse(fs.readFileSync('./constants/ABI.json'));
 
     // Replace with your contract address
-    const contractAddress = '0x6fb951f33e4e52ef0e9c1f78325a9223d7dd1f4d';
+    //0x6fb951f33e4e52ef0e9c1f78325a9223d7dd1f4d
+    const contractAddress = '0xBC33A5e0645afd2Ba0417EE80A82997d5faf6483';
 
     // Create a contract instance
     const contract = new ethers.Contract(contractAddress, contractABI, connectedWallet);
@@ -36,12 +37,29 @@ const { JsonRpcProvider } = require('ethers/providers');
             console.error('Error while storing string:', error);
         }
     }
+   const storeUserCertificateHash= async (userRef, IPFShash)=> {
+        try {
+            await contract.setUserCertificateHash(userRef, IPFShash);
+            console.log('String stored successfully');
+        } catch (error) {
+            console.error('Error while storing string:', error);
+        }
+    }
 
     // Function to retrieve a string
+   const getUserCertificateHash= async(userRef)=> {
+        try {
+            const result =  await contract.getUserCertificateHash(userRef);
+            console.log(`Hash is : `, result)
+            return result;
+        } catch (error) {
+            console.error('Error while retrieving string:', error);
+        }
+    }
    const getUserHash= async(userRef)=> {
         try {
-            const result = await contract.getUserHash(userRef);
-            // return the result 
+            const result =  await contract.getUserHash(userRef);
+            console.log(`Hash is : `, result)
             return result;
         } catch (error) {
             console.error('Error while retrieving string:', error);
@@ -49,7 +67,7 @@ const { JsonRpcProvider } = require('ethers/providers');
     }
 
 // storeUserHash('M5s4UA8ISs0NVnM1p6Nz', 'QmVXJZ7kZzYy5QKg9q5p8i4xV9qB9Yq8R9cKX6b7p6jHtZ')
-// getUserHash('M5s4UA8ISs0NVnM1p6Nz')
+// getUserHash('f8D7t6R2n9EzNbGo2XtF')
 
 
-module.exports = { storeUserHash, getUserHash, contract,contractAddress,contractABI,connectedWallet,provider,wallet,privateKey };
+module.exports = { storeUserHash, getUserHash, getUserCertificateHash,storeUserCertificateHash,contract,contractAddress,contractABI,connectedWallet,provider,wallet,privateKey };
