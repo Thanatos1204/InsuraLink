@@ -67,7 +67,7 @@ const { JsonRpcProvider } = require('ethers/providers');
     }
 
 // storeUserHash('M5s4UA8ISs0NVnM1p6Nz', 'QmVXJZ7kZzYy5QKg9q5p8i4xV9qB9Yq8R9cKX6b7p6jHtZ')
-// getUserHash('f8D7t6R2n9EzNbGo2XtF')
+// getUserHash('JVuuma0mzMuiGh2bdH5g')
 
 
 module.exports = { storeUserHash, getUserHash, getUserCertificateHash,storeUserCertificateHash,contract,contractAddress,contractABI,connectedWallet,provider,wallet,privateKey };

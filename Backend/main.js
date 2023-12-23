@@ -12,7 +12,7 @@ const { ethers } = require('ethers');
 // const fs = require('fs');
 require('dotenv').config();
 const { JsonRpcProvider } = require('ethers/providers');
-const { downloadFile } = require('./FetchFromIPFS.js')
+const downloadFile = require('./FetchFromIPFS.js');
 const { generateCertificate } = require('./childprocess.js')
 const useRef = 'rDrOXPjQ51hQeu5tBXGs'
 const FormData = './Data/johndoe.json'
@@ -40,14 +40,18 @@ async function addUserDetails(useRef, FormData) {
 
 // addUserDetails(useRef, FormData)
 
-async function fetchUserDetails(useRef) {
-    const UserKey = await readKey(useRef);
-    const IpfsHash = await getUserHash(useRef);
-    await downloadFile(IpfsHash, `${useRef}`);
-    await decryptFile(`${useRef}.txt`, UserKey, `${useRef}_decrypt.json`);
-    
-}
 
+    async function fetchUserDetails(useRef) {
+        const UserKey = await readKey(useRef);
+        const IpfsHash = await getUserHash(useRef);
+        await downloadFile(IpfsHash, `${useRef}`);
+        await decryptFile(`${useRef}.txt`, UserKey, `${useRef}_decrypt.json`);
+        return Promise.resolve(); // Resolve the Promise after all operations are completed
+      }
+      
+  
+
+// fetchUserDetails('JVuuma0mzMuiGh2bdH5g')
 async function genCertificate(name, useRef) {
     const certificate = await generateCertificate(name)
     const imageHash = await pinImageToIPFS(`./Certificates/${name}.jpg`)

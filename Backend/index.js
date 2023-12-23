@@ -52,26 +52,27 @@ app.post('/adduserdetails', async (req, res) => {
 app.post('/getuserdetails', async (req, res) => {
   const { useRef } = req.body;
   try {
-    await fetchUserDetails(useRef);
-    // Read the file asynchronously
+    await fetchUserDetails(useRef); // Ensure file creation completes before reading it
 
+    // Now read the file asynchronously
     try {
-      const data = await fs.readFileSync(`${useRef}_decrypt.json`);
-      const jsonData = await JSON.parse(data.toString()); // Convert Buffer to string and parse JSON
-      console.log(jsonData); // Display the parsed JSON data
-      // Perform operations with the parsed JSON data
+      const data = fs.readFileSync(`${useRef}_decrypt.json`);
+      const jsonData = JSON.parse(data.toString());
+      console.log(jsonData);
       res.status(200).send(jsonData);
     } catch (err) {
       console.error('Error reading file:', err);
+      res.status(500).send('Error reading file');
     }
   } catch (e) {
-    console.log(e)
+    console.log(e);
+    res.status(500).send('Error fetching user details');
   }
   if (fs.existsSync(`${useRef}_decrypt.json`)) {
-    deleteFile(`${useRef}_decrypt.json`)
+    // deleteFile(`${useRef}_decrypt.json`)
   }
   if (fs.existsSync(`${useRef}.txt`)) {
-    deleteFile(`${useRef}.txt`)
+    // deleteFile(`${useRef}.txt`)
   }
 
 });
@@ -87,7 +88,7 @@ app.post('/getusercertificate', async (req, res) => {
   }
 });
 
-const port = parseInt(process.env.PORT) || 8369;
+const port = parseInt(process.env.PORT) || 8080;
 app.listen(port, () => {
   console.log(`helloworld: listening on port ${port}`);
 });

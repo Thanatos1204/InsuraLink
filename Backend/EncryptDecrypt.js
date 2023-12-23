@@ -22,13 +22,19 @@ const decryptFile = async (inputFile, secretKey, outputFile) => {
   const output = await fs.createWriteStream(outputFile);
 
   let iv;
-  input.once('readable', async () => {
+  await input.once('readable', async () => {
     iv = await input.read(16);
     const decipher = await crypto.createDecipheriv(algorithm, secretKey, iv);
-    await input.pipe(decipher).pipe(output);
+    console.log('decipher created')
+    await input.pipe(decipher).pipe(output)
+    console.log('decipher createdss')
+
+ 
+   
   });
 };
 
 
 
+// decryptFile('JVuuma0mzMuiGh2bdH5g.txt','4d498ddb57f0139fe8f971b5c8cba965','JVuuma0mzMuiGh2bdH5g' )
 module.exports = { encryptFile, decryptFile };
