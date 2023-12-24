@@ -1,0 +1,21 @@
+
+
+
+.details{
+    margin: 50px auto;
+    width: 40%;
+    background-color: rgb(226, 226, 226);
+    padding: 30px;
+    border: 1px solid #808080;
+    border-radius: 10px;
+}
+.details p{
+    font-weight: 700;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+.details span{
+    font-weight: 200;
+    margin-left: 1rem;
+}

@@ -29,47 +29,46 @@ function Applyinsurance() {
    const [pdfurl,setPdfurl]=useState()
    const [pdf,setPdf]=useState()
    
-   const handlesubmit=async()=>{
-    try{     
-      
-      let imgbase64 = "";
-      let reader = new FileReader();
-      reader.readAsDataURL(pdfurl);
-      reader.onload = function () {
-      imgbase64 = reader.result;
-      setPdf(imgbase64);
-    
-    
-  };
+   const handlesubmit = async () => {
+    try {
+      console.log(userRef);
+      let imgBase64 = await new Promise((resolve, reject) => {
+        let reader = new FileReader();
+        reader.onload = function () {
+          resolve(reader.result);
+        };
+        reader.onerror = function (error) {
+          reject(error);
+        };
+        reader.readAsDataURL(pdfurl);
+      });
+   
       const body = {
-      useRef: '1FMqFXTlu13bN7ySbXKi',
-      jsonData:  {
-        "firstname":firstname,
-      "email":email,
-      "lastname":Lastname,
-      "gender":gender,
-      "contact":contact,
-      "address":address1+" "+address2,
-      "pincode": pincode,
-      "nationality":nationality,
-      "Maratial":martial,
-      "State":indstate,
-      "Occupation":occupation,
-      "pdf":pdf,
-      "visibility":true
+        useRef: 'nQw0lgfu1WXWxv0Men8DKaO3C3A3',
+        jsonData: {
+          "firstname": firstname,
+          "email": email,
+          "lastname": Lastname,
+          "gender": gender,
+          "contact": contact,
+          "address": address1 + " " + address2,
+          "pincode": pincode,
+          "nationality": nationality,
+          "Martial": martial,
+          "State": indstate,
+          "Occupation": occupation,
+          "pdf": imgBase64,
+          "visibility": true
+        }
+      };
+   
+      const res = await axios.post('http://localhost:8080/adduserdetails', { body });
+      Toaster.success('User Successfully Applied for Insurance');
+   
+    } catch (err) {
+      console.log(err, "Error in vendor page");
     }
-    }
-    
-    
-
-    // s
-    Toaster.success('User Successfully Applied for Insurance');
-     
-    }
-    catch(err){
-         console.log(err,"Error in vendor page")
-    }       
-  }
+   };
 
   async function getBrokerId(){
     let currentBrokerId;
@@ -231,7 +230,7 @@ function Applyinsurance() {
       </div>
       <h6>Upload Documents</h6>
       <div className='fileupload'>
-        <input  accept='pdf' type="file" onChange={(e)=>setPdfurl(e.target.files[0])}/>
+        <input  accept='pdf' type="file" onChange={(e)=>(setPdfurl(e.target.files[0]),console.log(pdfurl))}/>
         <span>*upload Documents in pdf</span>
       </div>
       </div>

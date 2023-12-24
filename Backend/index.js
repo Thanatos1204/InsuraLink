@@ -23,23 +23,24 @@ app.use(cors())
 
 
 app.post('/adduserdetails', async (req, res) => {
-  const { FormData } = req.body;
-  //     const jsonString = JSON.stringify(jsonData, null, 2);
-  //   console.log()
-  //   fs.writeFile(`${useRef}.json`, jsonString, (err) => {
-  //     if (err) {
-  //       console.error('Error creating JSON file:', err);
-  //       // Handle the error here
-  //     } else {
-  //       console.log(`File '${useRef}.json' created successfully`);
-  //       // File created successfully
-  //     }
-  //   });
+  const { useRef, jsonData } = req.body.body;
+  console.log(jsonData)
+      const jsonString = JSON.stringify(jsonData, null, 2);
+    console.log()
+    await fs.writeFile(`${useRef}.json`, jsonString, (err) => {
+      if (err) {
+        console.error('Error creating JSON file:', err);
+        // Handle the error here
+      } else {
+        console.log(`File '${useRef}.json' created successfully`);
+        // File created successfully
+      }
+    });
 
   
   try {
     console.log('creating user inside index file ')
-    await addUserDetails(useRef, FormData);
+    await addUserDetails(useRef);
     await console.log('user created')
     res.status(200).send('User details added successfully');
 
@@ -78,7 +79,7 @@ app.post('/getuserdetails', async (req, res) => {
 });
 
 app.post('/getusercertificate', async (req, res) => {
-  const { name,useRef } = req.body;
+  const { name,useRef } = req.body.body;
   try {
     const imageHash = await genCertificate(name, useRef)
     res.status(200).send(imageHash);
