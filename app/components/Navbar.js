@@ -8,7 +8,8 @@ import {
 
 
 
-const Navbar = () => {
+
+const Navbar = (props) => {
   return (
     <nav className="bg-[#1EA887] w-screen h-min">
       <div className="container flex items-center justify-between">
@@ -16,13 +17,13 @@ const Navbar = () => {
             <Link href="/">
             <h1 className="text-white text-lg font-semibold px-4">InsuraLink</h1>
             </Link>           
-            <p className="text-white px-4">Welcome BROKER {/*{user.name}*/}</p>
-            <Link href='/brokerdashboard'>
+            <p className="text-white px-4">Welcome {props.typeofuser}</p>
+            <Link href={`/${props.typeofuser}dashboard`}>
             <p className="text-white px-4">Dashboard</p>
             </Link>
-            <Link href='/brokerclients'>
-            <p className="text-white px-4">Clients</p>
-            </Link>
+            
+            {(props.typeofuser=='client') ?(<Link href='/applyinsurance'><p className="text-white px-4">Apply Insurance</p> </Link>):(<Link href='/brokerclients'><p className="text-white px-4">Clients</p> </Link>)}
+           
         </div>
         <div className='flex items-center justify-end px-10 gap-10'>        
             <FontAwesomeIcon icon={faBell}/>        

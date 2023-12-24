@@ -14,19 +14,19 @@ function Applyinsurance() {
 
   const { user } = UserAuth();
 
-   const[firstname,setFirstname]=useState()
-   const[Lastname,setLastname]=useState()
-   const[gender,setGender]=useState()
-   const[nationality,setNationality]=useState()
-   const[martial,setMartial]=useState()
-   const[occupation,setOccupation]=useState()
-   const[email,setEmail]=useState()
-   const[contact,setContact]=useState()
-   const[address1,setAddress1]=useState()
-   const[address2,setAddress2]=useState()
-   const[indstate,setIndstate]=useState()
-   const[pincode,setPincode]=useState()
-   const [pdfurl,setPdfurl]=useState(" ")
+   const[firstname,setFirstname]=useState("")
+   const[Lastname,setLastname]=useState("")
+   const[gender,setGender]=useState("")
+   const[nationality,setNationality]=useState("")
+   const[martial,setMartial]=useState("")
+   const[occupation,setOccupation]=useState("")
+   const[email,setEmail]=useState("")
+   const[contact,setContact]=useState("")
+   const[address1,setAddress1]=useState("")
+   const[address2,setAddress2]=useState("")
+   const[indstate,setIndstate]=useState("")
+   const[pincode,setPincode]=useState("")
+   const [pdfurl,setPdfurl]=useState('')
    const [pdf,setPdf]=useState()
    
    const handlesubmit = async () => {
