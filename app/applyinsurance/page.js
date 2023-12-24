@@ -40,7 +40,7 @@ function Applyinsurance() {
     
   };
       const body = {
-      useRef: '1FMqFXTlu13bN7ySbXKi',
+      useRef: 'fpRZnoX95eVBECjNKiodUeOzAd83',
       jsonData:  {
         "firstname":firstname,
       "email":email,
@@ -58,7 +58,7 @@ function Applyinsurance() {
     }
     }
 
-    const res = await axios.post('https://mumbaihacks-alisdej34q-uc.a.run.app/adduserdetails',{body});
+    const res = await axios.post('http://localhost:8080/adduserdetails',{body});
     Toaster.success('User Successfully Applied for Insurance');
      
     }
@@ -127,7 +127,7 @@ function Applyinsurance() {
       <div className='row'>
       <div className='col'>
       <div class="input-group input-group-icon">
-        <input type="text" placeholder="Martial Status" value={martial} onChange={(event) => (setMartial(event.currentTarget.value),console.log(userRef))}/>
+        <input type="text" placeholder="Martial Status" value={martial} onChange={(event) => (setMartial(event.currentTarget.value))}/>
         <div class="input-icon"><i class="fa fa-user"></i></div>
       </div>
       </div>

@@ -1,7 +1,7 @@
 
 const ethersFunctions = require('./StoreHashOnChain.js');
 const { storeUserHash, getUserHash, getUserCertificateHash,storeUserCertificateHash,contract, contractAddress, contractABI, connectedWallet, provider, wallet, privateKe } = ethersFunctions;
-const { collection, getDocs } = require('firebase/firestore')
+const { collection, getDocs,getDoc,doc} = require('firebase/firestore')
 const db = require('./firebase.js')
 const { encryptFile, decryptFile } = require('./EncryptDecrypt.js');
 const fs = require('fs');
@@ -21,11 +21,11 @@ const { deleteFile } = require('./deleteFile.js');
 const { get } = require('http');
 
 
-async function addUserDetails(useRef, FormData) {
+async function addUserDetails(useRef) {
     console.log('creating user')
     const UserKey = await readKey(useRef);
     console.log('key fetched from db')
-    await encryptFile(FormData, UserKey, `${useRef}.txt`);
+    await encryptFile(`${useRef}.json`, UserKey, `${useRef}.txt`);
     console.log(`file Encrypted with ${useRef}.txt`)
     if(fs.existsSync(`${useRef}.txt`)){
         console.log('file exists')
@@ -64,20 +64,18 @@ async function genCertificate(name, useRef) {
 
 
 async function readKey(userRef) {
-    const querySnapshot = await getDocs(collection(db, "Details"));
+    const docSnapshot = await getDoc(doc(db, "Client", userRef));
 
-    for (const doc of querySnapshot.docs) {
-        const docRefID = doc;
-        const Userkey = doc.data().key;
-
-        if (docRefID.id === userRef) {
-            return Userkey; // Return the Userkey when the condition is met
-        }
-    }
-
-    return null; // Return null if the userRef is not found
+   if (!docSnapshot.exists()) {
+       console.log("No such document!");
+       return null;
+   } else {
+       const data = docSnapshot.data();
+    //    console.log(data)
+       return data.key;
+   }
 }
-
+// readKey('fpRZnoX95eVBECjNKiodUeOzAd83')
 
 // readKey()
 
