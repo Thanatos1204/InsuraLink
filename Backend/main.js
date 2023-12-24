@@ -28,11 +28,14 @@ async function addUserDetails(useRef) {
     await encryptFile(`${useRef}.json`, UserKey, `${useRef}.txt`);
     console.log(`file Encrypted with ${useRef}.txt`)
     if(fs.existsSync(`${useRef}.txt`)){
-        console.log('file exists')
-        const IPFSObject = await pinFileToIPFS(useRef);
-        await storeUserHash(useRef, IPFSObject);
-        await deleteFile(`${useRef}.txt`);
+        setTimeout(() => {
+            console.log('file does not exist')
+        }, 2000);
     }
+    console.log('file exists')
+    const IPFSObject = await pinFileToIPFS(useRef);
+    await storeUserHash(useRef, IPFSObject);
+    await deleteFile(`${useRef}.txt`);
 
     console.log('creating user..')
 
@@ -71,7 +74,7 @@ async function readKey(userRef) {
        return null;
    } else {
        const data = docSnapshot.data();
-    //    console.log(data)
+       console.log(data)
        return data.key;
    }
 }
