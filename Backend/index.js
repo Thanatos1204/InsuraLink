@@ -23,7 +23,7 @@ app.use(cors())
 
 
 app.post('/adduserdetails', async (req, res) => {
-  const { useRef } = req.body;
+  const { FormData } = req.body;
   //     const jsonString = JSON.stringify(jsonData, null, 2);
   //   console.log()
   //   fs.writeFile(`${useRef}.json`, jsonString, (err) => {
