@@ -10,7 +10,7 @@ import {  collection, doc, getDoc, getDocs, query, setDoc, where } from 'firebas
 import { db } from "../firebase";
 
 function Applyinsurance() {
-  
+
 
   const { user } = UserAuth();
 
@@ -26,13 +26,12 @@ function Applyinsurance() {
    const[address2,setAddress2]=useState()
    const[indstate,setIndstate]=useState()
    const[pincode,setPincode]=useState()
-   const [pdfurl,setPdfurl]=useState()
+   const [pdfurl,setPdfurl]=useState(" ")
    const [pdf,setPdf]=useState()
    
    const handlesubmit = async () => {
-    try {
-      console.log(userRef);
-      let imgBase64 = await new Promise((resolve, reject) => {
+    try {      
+       let imgBase64 = await new Promise((resolve, reject) => {
         let reader = new FileReader();
         reader.onload = function () {
           resolve(reader.result);
@@ -41,7 +40,10 @@ function Applyinsurance() {
           reject(error);
         };
         reader.readAsDataURL(pdfurl);
+        
       });
+
+      // await putBroker();
    
       const body = {
         useRef: 'nQw0lgfu1WXWxv0Men8DKaO3C3A3',
@@ -92,6 +94,19 @@ function Applyinsurance() {
   }
 
   async function putBroker(){
+    
+    let imgBase64 = await new Promise((resolve, reject) => {
+      let reader = new FileReader();
+      reader.onload = function () {
+        resolve(reader.result);
+      };
+      reader.onerror = function (error) {
+        reject(error);
+      };
+      reader.readAsDataURL(pdfurl);
+      
+    });
+
     let docRef; 
     try{
     const BrokerID = await getBrokerId();
@@ -106,13 +121,13 @@ function Applyinsurance() {
       docRef = doc(db,'Broker',docs.id,'clients',user.uid);
     });
 
-    console.log(pdf);
+    console.log(imgBase64);
 
     const data = {
       clientfName: firstname,
       clientDocType: 'Aadhar Card',
       clientphone: contact,
-      clientDoc: pdf
+      clientDoc: 'Aadhar Card.pdf'
     }
     console.log('About to Push');
     await setDoc(docRef,data);

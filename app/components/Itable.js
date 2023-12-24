@@ -1,61 +1,86 @@
 'use client'
-
-import { useRouter } from 'next/router';
-import React from 'react'
+import { collection, doc, getDocs, deleteDoc, getDoc, query, where } from 'firebase/firestore';
+import React, { useEffect, useState } from 'react';
+import { UserAuth } from "../context/AuthContext";
+import { db } from '../firebase';
 
 const Itable = () => {
   //  const router = useRouter()
-    const data = [
-      
-      {
-        id: 2,
-        name: 'Papa Doe',
-        docType: 'Aadhar Card',
-        clientId: '1234-5678-9012',
-        document: 'AadharCard.pdf',
-        certificate: 'https://azure-attractive-ladybug-812.mypinata.cloud/ipfs/QmSfs6KUkbb91kfbakZTzL6LfinrZLT5Koiw5noCwGSBve?_gl=1*eylwnf*_ga*MTU5MzA4NzAxMy4xNjk1MTAwNTAw*_ga_5RMPXG14TE*MTcwMjc4NzQ2Ni4zNy4xLjE3MDI3ODc1OTkuNjAuMC4w'
-      },
-      {
-        id: 3,
-        name: 'Abraham Linc',
-        docType: 'Aadhar Card',
-        clientId: '1234-5678-9012',
-        document: 'AadharCard.pdf',
-        visible:true,
-        certificate : 'https://azure-attractive-ladybug-812.mypinata.cloud/ipfs/QmdNNH6jn4ZiSHpe9ruEyastJ9B9UfcdvCcPYVvhPmpYyw?_gl=1*1xt3yfv*_ga*MTU5MzA4NzAxMy4xNjk1MTAwNTAw*_ga_5RMPXG14TE*MTcwMjc4NzQ2Ni4zNy4xLjE3MDI3ODc2MTkuNDAuMC4w'
-      },
-      {
-        id: 4,
-        name: 'Mark Katson',
-        docType: 'Aadhar Card',
-        clientId: '1234-5678-9012',
-        document: 'AadharCard.pdf',
-        visible:true,
-        certificate : 'https://azure-attractive-ladybug-812.mypinata.cloud/ipfs/QmTcewmFVPjZD4WuK1DC9Tcx8HWgGrzkjY1m2ERjNmBaMD?_gl=1*2j4bl0*_ga*MTU5MzA4NzAxMy4xNjk1MTAwNTAw*_ga_5RMPXG14TE*MTcwMjc4NzQ2Ni4zNy4xLjE3MDI3ODc2MjAuMzkuMC4w'
-      }
-      ];
+
+
+  const { user } = UserAuth();
+
+  const [d, setD] = useState([]);
+
+  async function getBrokerId(){
+    let currentBrokerId;
+    const uid = user.uid;//Insurance Agent
+    console.log(uid);
+    try{
+    const agentRef = doc(db,"InsuranceAgent",uid);
+    
+    const agentSnap = await getDoc(agentRef);  
+
+    if(agentSnap.exists()){
+      console.log("Inside IF Block!")
+      currentBrokerId = agentSnap.data().brokerId;
+      console.log(currentBrokerId);
+    }
+
+  }catch(e){
+    console.log(e);
+  }
+    return currentBrokerId;
+  }
+
+  async function getData(){
+    const BrokerID = await getBrokerId();
+    let brokerRef="";
+    const q = query(collection(db,'Broker'),where("brokerId","==",BrokerID));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((docs)=>{
+      console.log(docs.id);
+      brokerRef = docs.id;
+    });
+
+    console.log("Inside getData function : "+brokerRef);
+    try{
+      const docRef = collection(doc(db,'Broker',brokerRef),'clients');
+      const docSnapshots = await getDocs(docRef);
+
+      setD(docSnapshots.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+    }catch(e){
+      console.log(e);
+    }
+  }
+
+  useEffect(()=>{
+    console.log("IN USE EFFECT",d);
+    getData();
+  },[])
+    
 
   return (
     <div>
        <div className=" flex justify-around items-center py-10 overflow-x-auto">
       <table className=" w-10/12 bg-white self-center text-center border border-gray-500">
-        <thead>
+      <thead>
           <tr>
             <th className="py-2 px-4 border-b">Client Name</th>
             <th className="py-2 px-4 border-b">Client Doc Type</th>
-            <th className="py-2 px-4 border-b">Client ID</th>
+            <th className="py-2 px-4 border-b">Client Phone No.</th>
             <th className="py-2 px-4 border-b">Document</th>
             <th className="py-2 px-4 border-b">Actions</th>
           </tr>
         </thead>
         <tbody>
-          {data.map((client,index) => (
-            <tr key={client.id} >
-              <td className="py-2 px-4 border-b">{client.name}</td>
-              <td className="py-2 px-4 border-b">{client.docType}</td>
-              <td className="py-2 px-4 border-b">{client.clientId}</td>
-              <td className="py-2 px-4 border-b">{client.document}</td>
-              <td className="py-2 px-4 border-b">
+          {  d.map((item) => (
+            <tr key={item.id}>
+              <td className="py-2 px-4 border-b">{item.clientfName}</td>
+              <td className="py-2 px-4 border-b">{item.clientDocType }</td>
+              <td className="py-2 px-4 border-b">{item.clientphone}</td>
+              <td className="py-2 px-4 border-b">{item.clientDoc}</td>
+              <td className="py-2 px-4 border-b">                
                 <button className="bg-blue-500 text-white py-1 px-2 mr-2" onClick={()=>(window.location.href = client.certificate)}>
                   Generate Certificate
                 </button>
