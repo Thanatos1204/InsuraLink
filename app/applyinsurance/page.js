@@ -6,11 +6,13 @@ import Link from 'next/link'
 import { UserAuth } from "../context/AuthContext";
 import { Toaster } from 'react-hot-toast';
 import axios from 'axios'
-
+import {  collection, doc, getDoc, getDocs, query, setDoc, where } from 'firebase/firestore';
+import { db } from "../firebase";
 
 function Applyinsurance() {
+  
 
-  const { userRef } = UserAuth();
+  const { user } = UserAuth();
 
    const[firstname,setFirstname]=useState("")
    const[Lastname,setLastname]=useState("")
@@ -68,8 +70,65 @@ function Applyinsurance() {
     }
    };
 
+  async function getBrokerId(){
+    let currentBrokerId;
+    const uid = user.uid;
+    console.log(uid);
+    try{
+    const clientRef = doc(db,"Client",uid);
+    
+    const clientSnap = await getDoc(clientRef);  
+
+    if(clientSnap.exists()){
+      console.log("Inside IF Block!")
+      currentBrokerId = clientSnap.data().brokerId;
+      console.log(currentBrokerId);
+    }
+
+  }catch(e){
+    console.log(e);
+  }
+    return currentBrokerId;
+  }
+
+  async function putBroker(){
+    let docRef; 
+    try{
+    const BrokerID = await getBrokerId();
+
+    const q = query(collection(db,'Broker'),where("brokerId","==",BrokerID));
+
+    const querySnapshot = await getDocs(q);
+     
+    querySnapshot.forEach((docs)=>{
+      console.log(docs.id);
+
+      docRef = doc(db,'Broker',docs.id,'clients',user.uid);
+    });
+
+    console.log(pdf);
+
+    const data = {
+      clientfName: firstname,
+      clientDocType: 'Aadhar Card',
+      clientphone: contact,
+      clientDoc: pdf
+    }
+    console.log('About to Push');
+    await setDoc(docRef,data);
+    console.log('Pushed');
+
+    }catch(e){
+      console.log(e);
+    }
+  }
+
+
+
+
   return (
     <div className='applyinsurance'>
+     
       <Toaster/>
       <head>
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"/>
@@ -111,7 +170,7 @@ function Applyinsurance() {
       <div className='row'>
       <div className='col'>
       <div class="input-group input-group-icon">
-        <input type="text" placeholder="Gender" value={gender} onChange={(event) => setGender(event.currentTarget.value)}/>
+        <input type="text" placeholder="Gender" value={gender} onChange={async (event) => await putBroker()}/>
         <div class="input-icon"><i class="fa fa-user"></i></div>
       </div>
       </div>
