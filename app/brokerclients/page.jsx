@@ -26,7 +26,7 @@ const broker = () => {
 
   return (
     <div>
-     <Navbar/>
+     <Navbar typeofuser={'Broker'}/>
      <BrokerTable/>   
     </div>
   )

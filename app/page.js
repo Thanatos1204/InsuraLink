@@ -56,6 +56,7 @@ const printUser = ()=>{
     // },[])
 
     useEffect(()=>{
+      
   
       window.__be = window.__be || {};
       window.__be.id = "65886077b1d7eb00078b8cc5";
