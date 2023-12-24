@@ -13,7 +13,7 @@ const { ethers } = require('ethers');
 require('dotenv').config();
 const { JsonRpcProvider } = require('ethers/providers');
 const downloadFile = require('./FetchFromIPFS.js');
-const { generateCertificate } = require('./childprocess.js')
+const generateCertificate = require('./generateCertificate.js');
 const useRef = 'rDrOXPjQ51hQeu5tBXGs'
 const FormData = './Data/johndoe.json'
 // delete a file 
@@ -54,12 +54,14 @@ async function addUserDetails(useRef, FormData) {
 // fetchUserDetails('JVuuma0mzMuiGh2bdH5g')
 async function genCertificate(name, useRef) {
     const certificate = await generateCertificate(name)
-    const imageHash = await pinImageToIPFS(`./Certificates/${name}.jpg`)
-    const store =  storeUserCertificateHash(useRef, imageHash)
+    const imageHash = await pinImageToIPFS(`./Certificates/${name}.png`)
+    const store =  await storeUserCertificateHash(useRef, imageHash)
+    await deleteFile(`./Certificates/${name}.png`)
     return imageHash
 }
+// genCertificate('Bhargav Pandit', 'JVuuma0mzMuiGh2bdH5g')
 
-// genCertificate('Khushi Vaishya', 'rDrOXPjQ51hQeu5tBXGs')
+
 
 async function readKey(userRef) {
     const querySnapshot = await getDocs(collection(db, "Details"));

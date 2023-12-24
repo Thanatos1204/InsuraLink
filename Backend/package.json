@@ -3,6 +3,7 @@
   "description": "Simple hello world sample in Node",
   "version": "1.0.0",
   "private": true,
+  "author": "Bhavik Punmiya",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
