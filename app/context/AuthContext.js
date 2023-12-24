@@ -7,21 +7,21 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, doc, setDoc } from "firebase/firestore";
 import { getDocs } from "firebase/firestore";  
 import { auth } from "../firebase";
 // import { db } from 'firebase/firestore';
 import { db } from "../firebase";
 import fernet from "fernet";
 import crypto from "crypto";
-
+  
 const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
+  const [count , setCount] = useState(0);
   const [user, setUser] = useState(null);
-  const [userRef, setUserRef] = useState(null);
-  const [roler, setRoler] = useState("");
-
+  
+  
   const googleSignIn = async (Role) => {
     const provider = new GoogleAuthProvider();
      signInWithPopup(auth, provider);
@@ -61,77 +61,91 @@ export const AuthContextProvider = ({ children }) => {
 
   const upload = async(email) =>{
     const key = secretkey();
-    try {
-      const docRef = await addDoc(collection(db, "Details"), {
-        broker_address: "0x00000",
-        key: key,
-        user_address: email
-      });
-      console.log("Document written with ID: ", docRef.id);
-      setUserRef(docRef.id);
-    } catch (e) {
-      console.error("Error adding document: ", e);
-    }
+    console.log("KEY = " + key);
+    return key;
   }
 
   
-   async function register(email,password,role){    
+   async function register(email,password,role,brId){
+    let uid = '';      
     try {
-      console.log("BEFOE REGISTER!!!!!!")
-         const res = await createUserWithEmailAndPassword(auth, email, password);
+      console.log("BEFORE REGISTER!!!!!!")
+         const res = await createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
+          // Signed up 
+          const user = userCredential.user;
+          uid = user.uid;          
+        });
+
          const resp = await upload(email);  
          console.log("After REGISTER!!!!!!")
-           const docRef = await addDoc(collection(db,"users"),{
-                Role: role,
-                Email: email                
-            });
-            console.log("ID: ",docRef.id)
-
-            console.log("AFTER DB!!!!!!")
-            return res;
-        
+         {/*Add to specific DB*/}
+         if(role == 'client'){
+          console.log("In Client");
+           await setDoc(doc(db,"Client",uid),{
+            brokerId: brId,
+            clientId: uid,
+            key: resp
+           })
+           setCount(prevCount => prevCount + 1);
+         }else if(role == 'broker'){
+          console.log("In Broker");
+            await setDoc(doc(db,"Broker",uid),{
+              brokerId: brId
+            })
+            setCount(prevCount => prevCount + 1);
+         }else if(role == 'insuranceAgent'){
+          console.log("In insuranceAgent");
+            await setDoc(doc(db,"InsuranceAgent",uid),{
+              agentId: uid,
+              brokerId: brId
+            })
+            setCount(prevCount => prevCount + 1);
+         }
+                
     } catch (error) {
         console.log(error);
-    }
-    
+    }    
 }
 
 const login = async(email,password)=>{
+  let uid = '';
+  let role = '';
   try{ 
-    const res = await signInWithEmailAndPassword(auth,email,password);
-    const querySnapshot = await getDocs(db,"Details");
-    querySnapshot.forEach((doc)=>{
-      if(doc.data().user_address == email){
-        console.log(doc.id);
-        // console.log(userRef);
+      await signInWithEmailAndPassword(auth,email,password).then((userCredential) => {
+      const user = userCredential.user;
+      uid = user.uid;
+    });
+    
+    const clientData = await getDocs(collection(db,"Client"));
+    clientData.forEach((doc)=>{
+      if(uid == doc.id){
+        console.log('You are a Client');        
+        role = "client";
       }
-    })
-   return res;
+    });
+
+    const brokerData = await getDocs(collection(db,"Broker"));
+    brokerData.forEach((doc)=>{
+      if(uid == doc.id){
+        console.log('You are a Broker');        
+        role = "broker";
+      }
+    });
+
+    const agentData = await getDocs(collection(db,"InsuranceAgent"));
+    agentData.forEach((doc)=>{
+      if(uid == doc.id){
+        console.log('You are a Insurance Agent');
+        role = "insuranceAgent";
+      }
+    });
+
+    return role;
+   
   }catch(error){
     console.log(error);
   }    
 } 
-
-
-async function fetchRole(email){
-  try{
-    const querySnapshot = await getDocs(collection(db, "users"));
-    querySnapshot.forEach((doc)=>{
-      if(doc.data().Email == email){
-       setRoler(doc.data().Role);   
-       return roler;   
-      }
-      
-    })
-  }catch(error){
-    console.log(error);
-  }
-}
-
- 
-  
-
- 
   
 
   const logOut = () => {
@@ -147,7 +161,7 @@ async function fetchRole(email){
   
 
   return (
-    <AuthContext.Provider value={{ user, googleSignIn, logOut,register,login,upload,fetchRole,roler,userRef}}>
+    <AuthContext.Provider value={{ user, googleSignIn, logOut,register,login,upload}}>
       {children}
     </AuthContext.Provider>
   );

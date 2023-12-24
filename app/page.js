@@ -161,30 +161,23 @@ Insured+ accessible</p><p className="subtitle">We believe that insurance should 
         className="mySwiper"
       >
         <SwiperSlide><div class="card">
-          <h5>Nick Polsen</h5>
-          <span>Rapid Exchange</span>
-          <p>I switched to this insurance company after having some issues with my previous ..</p>
+          <h5>20+</h5>
+          <span>Insurance Partner Companies</span>          
          </div></SwiperSlide>
          <SwiperSlide><div class="card">
-         <div class="bg"></div>
-         <div class="blob"></div>
+          <h5>AI</h5>
+          <span>Tools Leveraged</span>          
          </div></SwiperSlide>
          <SwiperSlide><div class="card">
-         <div class="bg"></div>
-         <div class="blob"></div>
+          <h5>150+</h5>
+          <span>Employees Insured</span>          
          </div></SwiperSlide>
          <SwiperSlide><div class="card">
-         <div class="bg"></div>
-         <div class="blob"></div>
+          <h5>28</h5>
+          <span>Team of Reliable Brokers</span>          
          </div></SwiperSlide>
-         <SwiperSlide><div class="card">
-         <div class="bg"></div>
-         <div class="blob"></div>
-         </div></SwiperSlide>
-         <SwiperSlide><div class="card">
-         <div class="bg"></div>
-         <div class="blob"></div>
-         </div></SwiperSlide>
+         
+         
 
       
       </Swiper>

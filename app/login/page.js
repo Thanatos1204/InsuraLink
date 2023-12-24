@@ -14,10 +14,10 @@ export default function login(){
 
     const [email,setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const { user, googleSignIn, logOut, login, fetchRole, roler } = UserAuth();
+    const { user, googleSignIn, logOut, login} = UserAuth();
     const [loading, setLoading] = useState(true);
     const [role, setRole] = useState("");
-    const [data,setData] = useState("");
+  
 
     const handleSignIn = async () => {
         try {
@@ -32,35 +32,21 @@ export default function login(){
         e.preventDefault();
         try{
            const response = await login(email,password);
-           setData(response);
-           console.log('Tried');
-           await fetchRole(email);
-           if(roler == role){            
-            console.log('Success');
-            if(roler == 'broker'){
-                window.location.href = '/brokerdashboard';
-            }else if(roler == 'insuranceAgent'){
-                window.location.href = '/insurancedashboard';
-            }else {
+           console.log(response);
+           if(response == "client"){
+                console.log("I enter into IF");
                 window.location.href = '/applyinsurance';
-            }
-           }            
-        }catch(error){
-        
+           }else if(response == "broker"){
+            window.location.href = '/brokerdashboard';
+           }else if(response == "insuranceAgent"){
+            window.location.href = '/insurancedashboard';
+           }
+        }catch(error){        
             console.log(error);
-        }
-        E
+        }        
     }
 
-    const fetchData = async(e) =>{
-        e.preventDefault();
-        try{
-           const rol =  await fetchRole(email);            
-            console.log(user);
-        }catch(error){
-            console.log(error);
-        }
-    }
+    
 
     useEffect(() => {
         const checkAuthentication = async () => {
@@ -85,7 +71,7 @@ export default function login(){
             <div className='flex justify-center py-3 text-sm'>
                 <span>Don't have an account? <Link href="/signup">Sign Up</Link></span>                
             </div>
-            {console.log(data)}
+          
             <header className='text-center text-5xl pb-5'>Login</header>
             <div className={styles.inputbox}>
                 <input type="text" class="input-field" required value={email} onChange={(event) => setEmail(event.currentTarget.value)}  placeholder="Your Email"/>

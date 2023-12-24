@@ -11,8 +11,9 @@ export default function signup(){
     const [email,setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [role, setRole] = useState("");
-    const { user, googleSignIn, logOut, register , fetchDocumentId } = UserAuth();
+    const { user, googleSignIn, logOut, register } = UserAuth();
     const [loading, setLoading] = useState(true);
+    const [brId , setBrId] = useState();
 
     const handleSignIn = async () => {
         try {
@@ -28,7 +29,7 @@ export default function signup(){
     async function regi(e){
     e.preventDefault();
         try{
-            await register(email,password,role);
+            await register(email,password,role,brId);
             window.location.href='/';            
         }catch(error){
           
@@ -79,9 +80,14 @@ export default function signup(){
 
            </div> 
            <div className={styles.inputbox}>
-                   <input type="text" class="input-field" placeholder="Role" required value={role} onChange={(event) => setRole(event.currentTarget.value)} />
+                   <input type="text" class="input-field" placeholder="Role" required value={role} onChange={(event) => setRole(event.currentTarget.value)}/>
                    <i class="bx bx-envelope"></i>
-               </div>   
+               </div>
+               <div className={styles.inputbox}>
+                   <input type="text" class="input-field" placeholder="Broker Id" required value={brId} onChange={(event) => setBrId(event.currentTarget.value)}/>
+                   <i class="bx bx-envelope"></i>
+               </div>
+
            <div className={styles.inputbox}>
                <input type="submit" class="submit" onClick={handleSignIn} onSubmit={handleSignIn} value="Sign In with Google"/>
                <input type="submit" class="submit" onClick={regi} onSubmit={regi} value="Register"/>   

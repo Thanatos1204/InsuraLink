@@ -221,7 +221,7 @@ line-height: 150%;
     color: #09384D;
     
    
-    font-size: 20px;
+    font-size: 80px;
     font-style: normal;
     font-weight: 700;
     line-height: 150%;
@@ -235,10 +235,8 @@ line-height: 150%;
     align-items: center;
   }
   .swiper-slide .card span{
-    color: #828282;
-
-  
-    font-size: 20px;
+    color: #828282;  
+    font-size: 40px;
     font-style: normal;
     font-weight: 700;
     line-height: 150%;
