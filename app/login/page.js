@@ -16,7 +16,7 @@ export default function login(){
     const [password, setPassword] = useState("");
     const { user, googleSignIn, logOut, login} = UserAuth();
     const [loading, setLoading] = useState(true);
-    const [role, setRole] = useState("");
+   
   
 
     const handleSignIn = async () => {
@@ -82,11 +82,7 @@ export default function login(){
                 <input type="password" class="input-field" required value={password} onChange={(event) => setPassword(event.currentTarget.value)}  placeholder="Password"/>
                 <i class="bx bx-lock-alt"></i>
             </div>
-            <div className="py-2"></div>
-            <div className={styles.inputbox}>
-                   <input type="text" class="input-field" placeholder="Role" required value={role} onChange={(event) => setRole(event.currentTarget.value)} />
-                   <i class="bx bx-envelope"></i>
-               </div>  
+            <div className="py-2"></div>            
             <div className={styles.inputbox}>
                 <input type="submit" class="submit" onClick={handleSignIn} value="Log In With Google"/>
                 <input type="submit" class="submit" onClick={logIn} value="Sign In"/>

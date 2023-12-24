@@ -171,7 +171,7 @@ function Applyinsurance() {
       </div>
       <h6>Upload Documents</h6>
       <div className='fileupload'>
-        <input  accept='pdf' type="file" onChange={(e)=>setPdfurl(e.target.files[0])}/>
+        <input  accept='pdf' type="file" onChange={(e)=>(setPdfurl(e.target.files[0]),console.log(pdfurl))}/>
         <span>*upload Documents in pdf</span>
       </div>
       </div>
