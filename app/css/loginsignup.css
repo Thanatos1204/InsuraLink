@@ -8,12 +8,15 @@
     font-family: 'Poppins', sans-serif;
 }
 body{
-    background: url("../../public/1.jpg");
+    
+   
+    overflow: hidden;
+    background-color:#fff;
+    background: url("../../public/2.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    overflow: hidden;
-    background-color:rgba(39, 39, 39, 0.4);
+    /* background-color:rgba(39, 39, 39, 0.4); */
     background-blend-mode: overlay;
     display: flex;
     justify-content: center;
@@ -95,6 +98,15 @@ body{
     display: flex;
     flex-direction: column;
     transition: .5s ease-in-out;
+    
+}
+#login{
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    background-color: rgba(247, 244, 244, 0.349);
+    border-radius: 12px;
+    border: 1px solid rgba(77, 79, 82, 0.368);
+    padding: 50px;
 }
 .registercontainer{
     position: absolute;
@@ -129,7 +141,7 @@ body{
 .input-field{
     font-size: 15px;
     background: rgba(255, 255, 255, 0.2);
-    color: #fff;
+    color: #545454;
     height: 50px;
     width: 100%;
     padding: 0 10px 0 45px;
