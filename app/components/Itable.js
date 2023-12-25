@@ -3,6 +3,7 @@ import { collection, doc, getDocs, deleteDoc, getDoc, query, where } from 'fireb
 import React, { useEffect, useState } from 'react';
 import { UserAuth } from "../context/AuthContext";
 import { db } from '../firebase';
+import Link from 'next/link';
 
 const Itable = () => {
   //  const router = useRouter()
@@ -81,9 +82,9 @@ const Itable = () => {
               <td className="py-2 px-4 border-b">{item.clientphone}</td>
               <td className="py-2 px-4 border-b">{item.clientDoc}</td>
               <td className="py-2 px-4 border-b">                
-                <button className="bg-blue-500 text-white py-1 px-2 mr-2" onClick={()=>(window.location.href = client.certificate)}>
+                <Link href='https://azure-attractive-ladybug-812.mypinata.cloud/ipfs/QmYo1U64i48fywxALh961zWs5snkNnHPKQwBZRyzVXag5f'><button className="bg-blue-500 text-white py-1 px-2 mr-2">
                   Generate Certificate
-                </button>
+                </button></Link>
                 
               </td>
             </tr>
