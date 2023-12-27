@@ -21,12 +21,15 @@ function Detailspage() {
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true); // Set loading to true before starting the fetch
       try {
         const response = await axios.post('http://localhost:8080/getuserdetails', { useRef: params.id});
         setData(response.data);
         console.log(data)
       } catch (error) {
         console.error('Error:', error);
+      }finally {
+        setIsLoading(false); // Set loading to false once the fetch is complete
       }
     };
  
@@ -39,18 +42,22 @@ function Detailspage() {
     <div className='detailspage'>
         <Navbar/>
         <div className='details'>
-          {params.id}
-            <p>Name : <span> Bhargav Pandit </span></p>
-            <p>Email : <span> bhargavpandit01@gmail.com </span></p>
-            <p>Gender : <span> Male </span></p>
-            <p>Contact : <span> 84250378054 </span></p>
-            <p>Address : <span> H Wing 702 Eternity Kanakia Spaces Thane (W) </span></p>
-            <p>Pincode : <span> 400604 </span></p>
-            <p>Nationality : <span> Indian </span></p>
-            <p>Martial Status : <span> Unmarried </span></p>
-            <p>Occupation : <span> Student </span></p>
-          <a>View Documents</a>            
-           
+        {isLoading ? (
+        <p>Loading...</p> // Show loading text while fetching data
+      ) : (
+        <>
+          <p>Name : <span> {data?.firstname} {data?.lastname} </span></p>
+          <p>Email : <span> {data?.email} </span></p>
+          <p>Gender : <span> {data?.gender} </span></p>
+          <p>Contact : <span> {data?.contact} </span></p>
+          <p>Address : <span> {data?.address} </span></p>
+          <p>Pincode : <span> {data?.pincode} </span></p>
+          <p>Nationality : <span> {data?.nationality} </span></p>
+          <p>Martial Status : <span> {data?.Martial} </span></p>
+          <p>Occupation : <span> {data?.Occupation} </span></p>
+          <a href={data?.pdf} target='_blank'>View Documents</a>          
+        </>
+      )}
         </div>
       
     </div>  
