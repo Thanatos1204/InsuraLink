@@ -4,6 +4,7 @@ import { collection, doc, getDocs, deleteDoc, getDoc } from 'firebase/firestore'
 import React, { useEffect, useState } from 'react';
 import { UserAuth } from "../context/AuthContext";
 import { db } from '../firebase';
+import { Link } from 'next/link';
 
 const BrokerTable = () => {
 
@@ -56,7 +57,10 @@ const BrokerTable = () => {
               <td className="py-2 px-4 border-b">{item.clientDocType }</td>
               <td className="py-2 px-4 border-b">{item.clientphone}</td>
               <td className="py-2 px-4 border-b">{item.clientDoc}</td>
-              <td className="py-2 px-4 border-b">                
+              <td className="py-2 px-4 border-b"> 
+              <button className="bg-blue-500 text-white mx-2 py-1 px-2" onClick={() => window.location.href='/detailspage'}>
+                  View Docs
+                </button >               
                 <button className="bg-red-500 text-white py-1 px-2" onClick={() => handleRemove(item.id)}>
                   Reject
                 </button >

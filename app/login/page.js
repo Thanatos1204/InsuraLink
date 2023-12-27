@@ -35,7 +35,7 @@ export default function login(){
            console.log(response);
            if(response == "client"){
                 console.log("I enter into IF");
-                window.location.href = '/applyinsurance';
+                window.location.href = '/clientdashboard';
            }else if(response == "broker"){
             window.location.href = '/brokerdashboard';
            }else if(response == "insuranceAgent"){
