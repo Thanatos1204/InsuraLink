@@ -58,9 +58,9 @@ const BrokerTable = () => {
               <td className="py-2 px-4 border-b">{item.clientphone}</td>
               <td className="py-2 px-4 border-b">{item.clientDoc}</td>
               <td className="py-2 px-4 border-b"> 
-              <button className="bg-blue-500 text-white mx-2 py-1 px-2" onClick={() => window.location.href='/brokerclients/'+item.id}>
+             < a href={'/brokerclients/'+item.id}> <button className="bg-blue-500 text-white mx-2 py-1 px-2">
                   View Docs
-                </button >               
+                </button > </a>            
                 <button className="bg-red-500 text-white py-1 px-2" onClick={() => handleRemove(item.id)}>
                   Reject
                 </button >

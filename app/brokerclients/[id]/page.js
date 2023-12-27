@@ -1,15 +1,16 @@
 'use client'
 
 import React from 'react'
-import Navbar from '../components/Navbar'
+import Navbar from '../../components/Navbar'
 import './detailspage.css'
 import { useState, useEffect } from 'react'
-import { UserAuth } from "../context/AuthContext";
+import { UserAuth } from "../../context/AuthContext";
 import axios from 'axios'
+import { useParams } from 'next/navigation'
 
 function Detailspage() {
 
-
+  const params = useParams();
 
 const [data, setData] = useState(null);
 const { user } = UserAuth();
@@ -19,7 +20,7 @@ const { user } = UserAuth();
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.post('http://localhost:8080/getuserdetails', { useRef: user.uid});
+        const response = await axios.post('http://localhost:8080/getuserdetails', { useRef: params.id});
         setData(response.data);
         console.log(data)
       } catch (error) {
@@ -30,11 +31,13 @@ const { user } = UserAuth();
     fetchData();
   }, []);
 
+  
  
   return (
     <div className='detailspage'>
         <Navbar/>
         <div className='details'>
+          {params.id}
             <p>Name : <span> Bhargav Pandit </span></p>
             <p>Email : <span> bhargavpandit01@gmail.com </span></p>
             <p>Gender : <span> Male </span></p>
