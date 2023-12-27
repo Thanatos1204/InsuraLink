@@ -62,7 +62,7 @@ const BrokerDashboard = () => {
   };
 
   return (<>
-    <Navbar typeofuser={'Broker'}></Navbar>
+    <Navbar typeofuser={'broker'}></Navbar>
     <div className='w-screen flex  justify-center items-center h-full py-5'>
     <div className='flex flex-col justify-center items-center gap-10 w-1/2 h-full'>
         

@@ -14,10 +14,12 @@ function Detailspage() {
 const [data, setData] = useState(null);
 const { user } = UserAuth();
 
+
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.post('http://localhost:8080/getuserdetails', { useRef: 'pgy3Ov4aSHfrJgYfaKCUnVIgUMX2'});
+        const response = await axios.post('http://localhost:8080/getuserdetails', { useRef: user.uid});
         setData(response.data);
         console.log(data)
       } catch (error) {
