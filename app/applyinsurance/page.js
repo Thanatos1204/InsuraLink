@@ -63,7 +63,7 @@ function Applyinsurance() {
           "visibility": true
         }
       };
-   
+      
       const res = await axios.post('http://localhost:8080/adduserdetails', { body });
       Toaster.success('User Successfully Applied for Insurance');
    
@@ -185,7 +185,7 @@ function Applyinsurance() {
       <div className='row'>
       <div className='col'>
       <div class="input-group input-group-icon">
-        <input type="text" placeholder="Gender" value={gender} onChange={async (event) => await putBroker()}/>
+        <input type="text" placeholder="Gender" value={gender} onChange={(event) => setGender(event.currentTarget.value)}/>
         <div class="input-icon"><i class="fa fa-user"></i></div>
       </div>
       </div>

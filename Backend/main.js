@@ -30,7 +30,7 @@ async function addUserDetails(useRef) {
     if(fs.existsSync(`${useRef}.txt`)){
         setTimeout(() => {
             console.log('file does not exist')
-        }, 2000);
+        }, 4000);
     }
     console.log('file exists')
     const IPFSObject = await pinFileToIPFS(useRef);
