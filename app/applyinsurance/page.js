@@ -43,7 +43,7 @@ function Applyinsurance() {
         
       });
 
-      // await putBroker();
+      await putBroker();
    
       const body = {
         useRef: user.uid,
@@ -185,7 +185,9 @@ function Applyinsurance() {
       <div className='row'>
       <div className='col'>
       <div class="input-group input-group-icon">
-        <input type="text" placeholder="Gender" value={gender} onChange={(event) => setGender(event.currentTarget.value)}/>
+        <input type="text" placeholder="Gender" value={gender} onChange={async (event) => {
+        await putBroker();
+        }}/>
         <div class="input-icon"><i class="fa fa-user"></i></div>
       </div>
       </div>
@@ -199,7 +201,7 @@ function Applyinsurance() {
       <div className='row'>
       <div className='col'>
       <div class="input-group input-group-icon">
-        <input type="text" placeholder="Martial Status" value={martial} onChange={(event) => (setMartial(event.currentTarget.value))}/>
+        <input type="text" placeholder="Martial Status" value={martial} onChange={async (event) => (setMartial(event.currentTarget.value), await handlesubmit())}/>
         <div class="input-icon"><i class="fa fa-user"></i></div>
       </div>
       </div>
