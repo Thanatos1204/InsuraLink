@@ -65,7 +65,7 @@ function Applyinsurance() {
       };
       
       const res = await axios.post('http://localhost:8080/adduserdetails', { body });
-      Toaster.success('User Successfully Applied for Insurance');
+      
    
     } catch (err) {
       console.log(err, "Error in vendor page");
@@ -251,10 +251,9 @@ function Applyinsurance() {
         <span>*upload Documents in pdf</span>
       </div>
       </div>
-      <button className='btn1' onClick={handlesubmit} >Submit</button>
-    
-    
+      
   </form>
+  <button type='button' className='btn1'  onClick={handlesubmit} >Submit</button>
 
         </section>
     

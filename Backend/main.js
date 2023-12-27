@@ -4,7 +4,7 @@ const { storeUserHash, getUserHash, getUserCertificateHash,storeUserCertificateH
 const { collection, getDocs,getDoc,doc} = require('firebase/firestore')
 const db = require('./firebase.js')
 const { encryptFile, decryptFile } = require('./EncryptDecrypt.js');
-const fs = require('fs');
+const fs = require('fs').promises;
 const pinFileToIPFS = require('./pinFileToIPFS.js')
 const pinImageToIPFS = require('./pinImageToIPFS.js')
 // const { storeUserHash, getUserHash, contract,contractAddress,contractABI,connectedWallet,provider,wallet,privateKey } = require('./StoreHashOnChain.js')   
@@ -19,26 +19,36 @@ const FormData = './Data/johndoe.json'
 // delete a file 
 const { deleteFile } = require('./deleteFile.js');
 const { get } = require('http');
+// const fs = require('fs');
 
 
 async function addUserDetails(useRef) {
-    console.log('creating user')
-    const UserKey = await readKey(useRef);
-    console.log('key fetched from db')
-    await encryptFile(`${useRef}.json`, UserKey, `${useRef}.txt`);
-    console.log(`file Encrypted with ${useRef}.txt`)
-    if(fs.existsSync(`${useRef}.txt`)){
-        setTimeout(() => {
-            console.log('file does not exist')
-        }, 4000);
+    try {
+        console.log('creating user');
+        const UserKey = await readKey(useRef);
+        console.log('key fetched from db');
+
+        await encryptFile(`${useRef}.json`, UserKey, `${useRef}.txt`);
+        console.log(`file Encrypted with ${useRef}.txt`);
+
+        // Check if file exists after encryption
+        try {
+            await fs.access(`${useRef}.txt`);
+            console.log('file exists');
+        } catch (error) {
+            console.error('file does not exist');
+            throw error; // Propagate the error up if file doesn't exist
+        }
+
+        const IPFSObject = await pinFileToIPFS(useRef);
+        await storeUserHash(useRef, IPFSObject);
+        await deleteFile(`${useRef}.txt`);
+
+        console.log('User created successfully');
+    } catch (error) {
+        console.error('Error in addUserDetails:', error);
+        // Handle the error appropriately
     }
-    console.log('file exists')
-    const IPFSObject = await pinFileToIPFS(useRef);
-    await storeUserHash(useRef, IPFSObject);
-    await deleteFile(`${useRef}.txt`);
-
-    console.log('creating user..')
-
 }
 
 // addUserDetails(useRef, FormData)
