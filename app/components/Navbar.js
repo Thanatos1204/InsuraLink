@@ -28,8 +28,10 @@ const Navbar = (props) => {
         <div className='flex items-center justify-end px-10 gap-10'>        
             <FontAwesomeIcon icon={faBell}/>        
             <Image
-            src="" //{/*user.profilePic*/}
+            src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pngwing.com%2Fen%2Ffree-png-zlrqq&psig=AOvVaw2zu9efrgCpH1bW5p19L_bQ&ust=1703534086341000&source=images&cd=vfe&ved=0CBIQjRxqFwoTCIjj2aHuqIMDFQAAAAAdAAAAABAE" 
             alt="Profile"
+            width={20}
+            height={20}
             className="w-8 h-8 rounded-full object-cover"
             />
         </div>   
