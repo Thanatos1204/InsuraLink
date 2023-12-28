@@ -1,5 +1,5 @@
 const express = require('express');
-const { addUserDetails, fetchUserDetails,genCertificate } = require('./main.js'); // replace with your contract file path
+const { addUserDetails, fetchUserDetails,genCertificate,revoCertificate } = require('./main.js'); // replace with your contract file path
 const cors = require('cors')
 const bodyParser = require('body-parser');
 const fs = require('fs');
@@ -89,6 +89,17 @@ app.post('/getusercertificate', async (req, res) => {
   } catch (error) {
     console.error('Error while adding user details:', error);
     res.status(500).send('Error while adding user details');
+  }
+});
+
+app.post('/revokecertificate', async (req, res) => {
+  const { name , useRef } = req.body.body;
+  try {
+    const imageIPFShash = await revoCertificate(name, useRef);
+    res.status(200).send('Certificate revoked successfully ' +  imageIPFShash);
+  } catch (error) {
+    console.error('Error while revoking certificate:', error);
+    res.status(500).send('Error while revoking certificate');
   }
 });
 

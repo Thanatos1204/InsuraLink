@@ -12,7 +12,7 @@ const downloadFile = require('./FetchFromIPFS.js');
 const generateCertificate = require('./generateCertificate.js');
 const { deleteFile } = require('./deleteFile.js');
 const sendEmailToRecipient = require('./mailer.js');
-
+const revokeCertificate = require('./revokeCertificate.js');
 async function addUserDetails(useRef) {
     try {
         console.log('creating user');
@@ -76,7 +76,15 @@ async function genCertificate(name, useRef) {
 }
 // genCertificate('Bhargav Pandit', 'JVuuma0mzMuiGh2bdH5g')
 
+async function revoCertificate(name, useRef){
+    const certificate = await revokeCertificate(name)
+    const imageHash = await pinImageToIPFS(`./Certificates/${name}.png`)
+    const store = await storeUserCertificateHash(useRef, imageHash)
+    return imageHash
 
+}
+
+// 
 
 async function readKey(userRef) {
     const docSnapshot = await getDoc(doc(db, "Client", userRef));
@@ -113,4 +121,4 @@ async function readKey(userRef) {
 
 
 
-module.exports = { addUserDetails, fetchUserDetails, genCertificate } 
+module.exports = { addUserDetails, fetchUserDetails, genCertificate, revoCertificate } 
