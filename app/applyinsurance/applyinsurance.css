@@ -53,7 +53,7 @@ header {
   box-sizing: border-box;
 }
 .applyinsurance section{
-    width: 60%;
+    width: 80%;
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -67,16 +67,16 @@ async function fetchUserDetails(useRef) {
 
 
 // fetchUserDetails('JVuuma0mzMuiGh2bdH5g')
-async function genCertificate(name, useRef) {
+async function genCertificate(name, useRef,email) {
     const certificate = await generateCertificate(name)
-    const email = sendEmailToRecipient('Bhavikpunmiya01@gmail.com', name)
+    const email = sendEmailToRecipient(email, name)
     const imageHash = await pinImageToIPFS(`./Certificates/${name}.png`)
     const store = await storeUserCertificateHash(useRef, imageHash)
     return imageHash
 }
 // genCertificate('Bhargav Pandit', 'JVuuma0mzMuiGh2bdH5g')
 
-async function revoCertificate(name, useRef){
+async function revoCertificate(name, useRef, email){
     const certificate = await revokeCertificate(name)
     const imageHash = await pinImageToIPFS(`./Certificates/${name}.png`)
     const store = await storeUserCertificateHash(useRef, imageHash)

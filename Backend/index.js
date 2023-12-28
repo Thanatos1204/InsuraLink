@@ -81,7 +81,7 @@ app.post('/getuserdetails', async (req, res) => {
 });
 
 app.post('/getusercertificate', async (req, res) => {
-  const { name,useRef } = req.body.body;
+  const { name,useRef, email} = req.body.body;
   try {
     const imageHash = await genCertificate(name, useRef)
     res.status(200).send(imageHash);
@@ -92,7 +92,7 @@ app.post('/getusercertificate', async (req, res) => {
 });
 
 app.post('/revokecertificate', async (req, res) => {
-  const { name , useRef } = req.body.body;
+  const { name , useRef, email} = req.body.body;
   try {
     const imageIPFShash = await revoCertificate(name, useRef);
     res.status(200).send('Certificate revoked successfully ' +  imageIPFShash);
