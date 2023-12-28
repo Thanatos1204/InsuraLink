@@ -1,9 +1,5 @@
 const express = require('express');
-<<<<<<< HEAD
 const { addUserDetails, fetchUserDetails,genCertificate,revoCertificate,fetchuserCertificate} = require('./main.js'); // replace with your contract file path
-=======
-const { addUserDetails, fetchUserDetails,genCertificate,revoCertificate, fetchuserCertificate } = require('./main.js'); // replace with your contract file path
->>>>>>> e9908ceaeef213b11a7fbca1d5cba6b338d3e792
 const cors = require('cors')
 const bodyParser = require('body-parser');
 const fs = require('fs');
