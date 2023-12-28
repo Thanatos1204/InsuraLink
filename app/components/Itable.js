@@ -56,8 +56,16 @@ const Itable = () => {
     }
   }
 
-  function generateCertificate(){
-    console.log("Inside generateCertificate function"); 
+  async function generateCertificate(id){
+    const docRef = doc(db, 'Broker', user.uid, 'clients', id);
+    const docSnapshot = await getDoc(docRef);
+
+    const name = docSnapshot.data().clientfName;
+    const email = docSnapshot.data().clientEmail;
+    const useRef = id;
+
+    console.log("Inside generateCertificate function");
+
   }
   
 
@@ -88,7 +96,7 @@ const Itable = () => {
               <td className="py-2 px-4 border-b">{item.clientphone}</td>
               <td className="py-2 px-4 border-b">{item.clientDoc}</td>
               <td className="py-2 px-4 border-b">                
-                <button className="bg-blue-500 text-white py-1 px-2 mr-2" onClick={async ()=> {await generateCertificate}}>
+                <button className="bg-blue-500 text-white py-1 px-2 mr-2" onClick={async ()=> {await generateCertificate(item.id)}}>
                   Generate Certificate
                 </button>
                 <button className="bg-red-500 text-white py-1 px-2">
