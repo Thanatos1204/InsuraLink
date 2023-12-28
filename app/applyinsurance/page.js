@@ -152,11 +152,6 @@ function Applyinsurance() {
   return (<>
     <Toaster />
     <div className='applyinsurance'>
-    
-      <head>
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"/>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-      </head>
       <header>
             <Link className="logo" href="/">InsuraLink</Link>
             <nav>
@@ -174,9 +169,9 @@ function Applyinsurance() {
                 Fill Your Details
             </h3>
             <form onSubmit={async (e)=>await handleSubmit(e)}>
-    <div className="row">
+    <div className="w-full">
       <h6>Personal Information</h6>
-      <div className='row'>
+      <div className='flex gap-2'>
       <div className='col'>
       <div className="input-group input-group-icon">
         <input type="text" placeholder="First Name" value={firstname} onChange={(event) => setFirstname(event.currentTarget.value)}/>
@@ -190,7 +185,7 @@ function Applyinsurance() {
       </div>
       </div>
       </div>
-      <div className='row'>
+      <div className='flex gap-2'>
       <div className='col'>
       <div className="input-group input-group-icon">
         <input type="text" placeholder="Gender" value={gender} onChange={(event) => setGender(event.currentTarget.value)}/>
@@ -204,7 +199,7 @@ function Applyinsurance() {
       </div>
       </div>
       </div>
-      <div className='row'>
+      <div className='flex gap-2'>
       <div className='col'>
       <div className="input-group input-group-icon">
         <input type="text" placeholder="Martial Status" value={martial} onChange={(event) => (setMartial(event.currentTarget.value))}/>
@@ -237,7 +232,7 @@ function Applyinsurance() {
         <input type="text"  placeholder="Address Line 2" value={address2} onChange={(event) => setAddress2(event.currentTarget.value)}/>
         <div className="input-icon"><i className="fa fa-envelope"></i></div>
       </div>
-      <div className='row'>
+      <div className='flex gap-2'>
       <div className='col'>
       <div className="input-group input-group-icon" >
         <input type="text" placeholder="State" value={indstate} onChange={(event) => setIndstate(event.currentTarget.value)}/>
