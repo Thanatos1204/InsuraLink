@@ -8,6 +8,7 @@ import axios from 'axios'
 import {  collection, doc, getDoc, getDocs, query, setDoc, where } from 'firebase/firestore';
 import { db } from "../firebase";
 import toast, { Toaster } from 'react-hot-toast';
+import Navbar from '../components/Navbar';
 
 
 
@@ -146,25 +147,10 @@ function Applyinsurance() {
       
     }
   }
-
-
-
-
   return (<>
     <Toaster />
     <div className='applyinsurance'>
-      <header>
-            <Link className="logo" href="/">InsuraLink</Link>
-            <nav>
-                <ul className="nav__links">
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Projects</a></li>
-                    <li><a href="#">About</a></li>
-                </ul>
-            </nav>
-           
-        </header>
-  
+      <Navbar typeofuser={'client'}/>
         <section>
         <h3>
                 Fill Your Details
@@ -257,10 +243,7 @@ function Applyinsurance() {
   <button type='submit' className='btn1'>Submit</button>
   </form>
 
-        </section>
-     
-   
-     
+        </section>  
 
     </div>
     </>

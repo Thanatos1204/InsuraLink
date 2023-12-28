@@ -1,19 +1,33 @@
 'use client'
 import Link from 'next/link';
 import './ctable.css';
+import { UserAuth } from "../context/AuthContext";
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const Ctable = () => {
+  const { user } = UserAuth();
+  
   const [apiResponse, setApiResponse] = useState(null);
+  
 
-  useEffect(() => {
+  async function getCert(){
     // Make the API call using Axios
-    axios.get('your_api_endpoint')
+
+
+    axios.get('http://localhost:8080/fetchUserCertificate',{ useRef: user.uid })
       .then(response => setApiResponse(response.data))
       .catch(error => console.error('Error fetching data:', error));
-  }, []); // Run this effect only once when the component mounts
+  } // Run this effect only once when the component mounts
 
+  useEffect(()=>{
+    if (user) {
+      axios.get('http://localhost:8080/fetchUserCertificate',{ useRef: user.uid })
+        .then(response => setApiResponse(response.data))
+        .catch(error => console.error('Error fetching data:', error));
+    }
+   },[user])
+   
   return (
     <div>
       {apiResponse === null ? (
@@ -45,7 +59,7 @@ const Ctable = () => {
                   <td className="py-2 px-4 border-b">{item.brokerId}</td>
                   <td className="py-2 px-4 border-b">
                     <Link href={item.certificateLink}>
-                      <button className="bg-blue-500 text-white py-2 px-2 mr-2 rounded">
+                      <button className="bg-blue-500 text-white py-2 px-2 mr-2 rounded" onClick={async () =>{await getCert()}}>
                         View Certificate
                       </button>
                     </Link>
