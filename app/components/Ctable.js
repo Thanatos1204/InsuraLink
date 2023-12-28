@@ -15,14 +15,14 @@ const Ctable = () => {
     // Make the API call using Axios
 
 
-    axios.post('http://localhost:8080/fetchUserCertificate',{ useRef: user.uid })
+    axios.post('https://backend-alisdej34q-uc.a.run.app/fetchUserCertificate',{ useRef: user.uid })
       .then(response => setApiResponse(response.data))
       .catch(error => console.error('Error fetching data:', error));
   } // Run this effect only once when the component mounts
 
   useEffect(()=>{
     if (user) {
-      axios.post('http://localhost:8080/fetchUserCertificate',{ useRef: user.uid })
+      axios.post('https://backend-alisdej34q-uc.a.run.app/fetchUserCertificate',{ useRef: user.uid })
         .then(response => setApiResponse(response.data))
         .catch(error => console.error('Error fetching data:', error));
 
@@ -32,7 +32,7 @@ const Ctable = () => {
    
   return (
     <div>
-      {apiResponse === null ? (
+      {apiResponse == 'https://azure-attractive-ladybug-812.mypinata.cloud/ipfs/' ? (
         // Render this if the API response is null
         <div className="text-center mt-10">
           <p>You don't have any insurance certificates.</p>
@@ -54,20 +54,20 @@ const Ctable = () => {
             </thead>
             <tbody>
               {/* Map over the data and render rows */}
-              { 
+              {apiResponse && (
                 <tr>
                   <td className="py-2 px-4 border-b">MarshMcLennan</td>
                   <td className="py-2 px-4 border-b">Health</td>
                   <td className="py-2 px-4 border-b">010</td>
                   <td className="py-2 px-4 border-b">
-                    <Link href={apiResponse} target='_blank'>
-                      <button className="bg-blue-500 text-white py-2 px-2 mr-2 rounded" onClick={async () =>{await getCert()}}>
+                    
+                      <button className="bg-blue-500 text-white py-2 px-2 mr-2 rounded" onClick={async () =>(await getCert(),window.location.href = apiResponse)} >
                         View Certificate
                       </button>
-                    </Link>
+                    
                   </td>
                 </tr>
-              }
+              )}
             </tbody>
           </table>
         </div>

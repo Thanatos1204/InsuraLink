@@ -69,7 +69,7 @@ function Applyinsurance() {
         }
       };
       
-      const res = await axios.post('http://localhost:8080/adduserdetails', { body });
+      const res = await axios.post('https://backend-alisdej34q-uc.a.run.app/adduserdetails', { body });
       toast.success('Your form has successfully submited');
    
     } catch (err) {

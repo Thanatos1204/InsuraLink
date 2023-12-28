@@ -68,10 +68,12 @@ const Itable = () => {
     let name = '';
     let email = '';
     docSnapshots.forEach((docs) => {
+      if(docs.id == id){
         name = docs.data().clientfName;
         email = docs.data().clientEmail;
+      }
     });
-
+    console.log("My Name is: "+name)
     const useRef = id;
     const body = {
         name,
@@ -81,7 +83,7 @@ const Itable = () => {
 
     console.log("Inside generateCertificate function");
 
-    const res = await axios.post('http://localhost:8080/getusercertificate', { body });
+    const res = await axios.post('https://backend-alisdej34q-uc.a.run.app/getusercertificate', { body });
     console.log(res.data);
     toast.success('Certificate Generated Successfully for ' + name);
 }
@@ -93,9 +95,11 @@ async function revokeCertificate(id){
     let name = '';
     let email = '';
     docSnapshots.forEach((docs) => {
+      if(docs.id == id){
         name = docs.data().clientfName;
         email = docs.data().clientEmail;
-    });
+      }
+  });
 
     const useRef = id;
     const body = {
@@ -106,7 +110,7 @@ async function revokeCertificate(id){
 
     console.log("Inside generateCertificate function");
 
-    const res = await axios.post('http://localhost:8080/revokecertificate', { body });
+    const res = await axios.post('https://backend-alisdej34q-uc.a.run.app/revokecertificate', { body });
     console.log(res.data);
     toast.success('Certificate Revoked Successfully for ' + name);
 }
