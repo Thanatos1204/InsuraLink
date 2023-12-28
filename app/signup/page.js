@@ -23,9 +23,6 @@ export default function signup(){
         console.log(error);
         }
     };
-
-   
-
     async function regi(e){
     e.preventDefault();
         try{
@@ -36,10 +33,7 @@ export default function signup(){
             console.log(error);
         }
     }
-
-    
-
-    useEffect(() => {
+        useEffect(() => {
         const checkAuthentication = async () => {
         await new Promise((resolve) => setTimeout(resolve, 50));
         setLoading(false);
@@ -54,7 +48,7 @@ export default function signup(){
       
         <div className={styles.registercontainer} id="register">
            <div className='flex justify-center py-3 text-sm'>
-               <span>Have an account? <a href="#" onclick="login()">Login</a></span>                
+               <span>Have an account? <a href="/login">Login</a></span>                
            </div>
            <header className='text-center text-5xl pb-5'>Sign Up</header>
            <div className='flex gap-5 justify-center py-5'>
@@ -80,16 +74,28 @@ export default function signup(){
 
            </div> 
            <div className={styles.inputbox}>
-                   <input type="text" class="input-field" placeholder="Role" required value={role} onChange={(event) => setRole(event.currentTarget.value)}/>
-                   <i class="bx bx-envelope"></i>
-               </div>
+                <select
+                    className="input-field"
+                    value={role}
+                    onChange={(event) => setRole(event.currentTarget.value)}
+                    required
+                >
+                    <option value="" disabled selected>
+                    Select Role
+                    </option>
+                    <option value="client">Client</option>
+                    <option value="broker">Broker</option>
+                    <option value="insuranceAgent">Insurance Agent</option>
+                </select>
+                <i class="bx bx-envelope"></i>
+            </div>
+
                <div className={styles.inputbox}>
                    <input type="text" class="input-field" placeholder="Broker Id" required value={brId} onChange={(event) => setBrId(event.currentTarget.value)}/>
                    <i class="bx bx-envelope"></i>
                </div>
 
-           <div className={styles.inputbox}>
-               <input type="submit" class="submit" onClick={handleSignIn} onSubmit={handleSignIn} value="Sign In with Google"/>
+           <div className={styles.inputbox}>               
                <input type="submit" class="submit" onClick={regi} onSubmit={regi} value="Register"/>   
            </div>
            <div className='flex justify-between'>

@@ -83,8 +83,7 @@ export default function login(){
                 <i class="bx bx-lock-alt"></i>
             </div>
             <div className="py-2"></div>            
-            <div className={styles.inputbox}>
-                <input type="submit" class="submit" onClick={handleSignIn} value="Log In With Google"/>
+            <div className={styles.inputbox}>                
                 <input type="submit" class="submit" onClick={logIn} value="Sign In"/>
             </div>
             <div className="flex justify-between text-xs">

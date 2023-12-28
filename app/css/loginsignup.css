@@ -108,8 +108,11 @@ body{
     border: 1px solid rgba(77, 79, 82, 0.368);
     padding: 50px;
 }
-.registercontainer{
-    position: absolute;
+#register{
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    background-color: rgba(247, 244, 244, 0.349);
+    border-radius: 50px;
     right: -520px;
     width: 500px;
     display: flex;
