@@ -4,7 +4,7 @@ const { storeUserHash, getUserHash, getUserCertificateHash, storeUserCertificate
 const { collection, getDocs, getDoc, doc } = require('firebase/firestore')
 const db = require('./firebase.js')
 const { encryptFile, decryptFile } = require('./EncryptDecrypt.js');
-const fs = require('fs').promises;
+const fs = require('fs');
 const pinFileToIPFS = require('./pinFileToIPFS.js')
 const pinImageToIPFS = require('./pinImageToIPFS.js')
 require('dotenv').config();
@@ -46,12 +46,23 @@ async function addUserDetails(useRef) {
 
 
 async function fetchUserDetails(useRef) {
-    const UserKey = await readKey(useRef);
-    const IpfsHash = await getUserHash(useRef);
-    await downloadFile(IpfsHash, `${useRef}`);
-    await decryptFile(`${useRef}.txt`, UserKey, `${useRef}_decrypt.json`);
-    return Promise.resolve(); // Resolve the Promise after all operations are completed
-}
+    try {
+      const UserKey = await readKey(useRef);
+      const IpfsHash = await getUserHash(useRef);
+      await downloadFile(IpfsHash, `${useRef}`);
+      const decryptedFileMsg = await decryptFile(`${useRef}.txt`, UserKey, `${useRef}_decrypt.json`);
+      console.log(decryptedFileMsg);
+  
+      const data = await fs.readFileSync(`${useRef}_decrypt.json`);
+      deleteFile(`${useRef}.txt`);
+      deleteFile(`${useRef}_decrypt.json`);
+      return data;
+    } catch (error) {
+      console.error('Error:', error);
+      // Handle the error here
+      return null;
+    }
+  }
 
 
 
