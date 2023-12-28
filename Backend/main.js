@@ -69,7 +69,7 @@ async function fetchUserDetails(useRef) {
 // fetchUserDetails('JVuuma0mzMuiGh2bdH5g')
 async function genCertificate(name, useRef,email) {
     const certificate = await generateCertificate(name)
-    const email = sendEmailToRecipient(email, name)
+    const emailsend= sendEmailToRecipient(email, name)
     const imageHash = await pinImageToIPFS(`./Certificates/${name}.png`)
     const store = await storeUserCertificateHash(useRef, imageHash)
     return imageHash

@@ -63,8 +63,16 @@ const Itable = () => {
     const name = docSnapshot.data().clientfName;
     const email = docSnapshot.data().clientEmail;
     const useRef = id;
-
+    const body = {
+      name,
+      email,
+      useRef
+    }
     console.log("Inside generateCertificate function");
+
+    const res = await axios.post('http://localhost:8080/getusercertificate', { body });    
+    console.log(res.data)
+    toast.success('Certificate Generated Successfully for '+name); 
 
   }
   

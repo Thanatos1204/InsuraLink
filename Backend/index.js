@@ -83,7 +83,7 @@ app.post('/getuserdetails', async (req, res) => {
 app.post('/getusercertificate', async (req, res) => {
   const { name,useRef, email} = req.body.body;
   try {
-    const imageHash = await genCertificate(name, useRef)
+    const imageHash = await genCertificate(name, useRef,email)
     res.status(200).send(imageHash);
   } catch (error) {
     console.error('Error while adding user details:', error);
