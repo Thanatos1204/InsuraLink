@@ -1,33 +1,35 @@
 const fs = require('fs');
 const { createCanvas, loadImage } = require('canvas');
+const opentype = require('opentype.js');
 
-async function revokeCertificate(name) {
-  const canvas = await createCanvas(1414, 2000);
-  const ctx = await canvas.getContext('2d');
+async function generateCertificate(name) {
+ const canvas = await createCanvas(1414, 2000);
+ const ctx = await canvas.getContext('2d');
 
-  const img = await loadImage('Invalid Insurance Template.png');
-  ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+ const img = await loadImage('Invalid Insurance Template.png');
+ ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-  ctx.font = '80px Arial';
-  ctx.fillStyle = 'rgb(62, 108, 118)';
+ // Load the font file
+ let font = opentype.loadSync('./arial/arial.ttf');
 
-  // Measure the width of the text
-  const textWidth = ctx.measureText(name).width;
+ ctx.font = `80px ${font}`;
+ ctx.fillStyle = 'rgb(62, 108, 118)';
 
-  // Calculate the x coordinate for centering the text
-  const x = (canvas.width - textWidth) / 2;
+ // Measure the width of the text
+ const textWidth = ctx.measureText(name).width;
 
-  // Draw the text at the calculated x coordinate
-  ctx.fillText(name, x, 760);
-  ctx.font = '22px Arial';
-  ctx.fillStyle = 'rgb(65, 75, 59)';
-  ctx.fillText(name, 100, 282);
-  ctx.fillText(name, 471, 366);
+ // Calculate the x coordinate for centering the text
+ const x = (canvas.width - textWidth) / 2;
 
-  const buffer = canvas.toBuffer('image/png');
-  await fs.writeFileSync('./Certificates/' + name + '.png', buffer);
+ // Draw the text at the calculated x coordinate
+ ctx.fillText(name, x, 760);
+ ctx.font = `22px ${font}`;
+ ctx.fillStyle = 'rgb(65, 75, 59)';
+ ctx.fillText(name, 100, 282);
+ ctx.fillText(name, 471, 366);
+
+ const buffer = canvas.toBuffer('image/png');
+ await fs.writeFileSync('./Certificates/' + name + '.png', buffer);
 }
 
-// generateCertificate('Bhargav Pandit');
-
-module.exports = revokeCertificate;
+module.exports = generateCertificate;
