@@ -5,6 +5,9 @@ import { UserAuth } from "../context/AuthContext";
 import { db } from '../firebase';
 import Link from 'next/link';
 import './ctable.css'
+import toast, { Toaster } from 'react-hot-toast';
+import axios from 'axios';
+
 
 const Itable = () => {
   //  const router = useRouter()
@@ -13,6 +16,7 @@ const Itable = () => {
   const { user } = UserAuth();
 
   const [d, setD] = useState([]);
+  let brokerRef="";
 
   async function getBrokerId(){
     let currentBrokerId;
@@ -37,7 +41,7 @@ const Itable = () => {
 
   async function getData(){
     const BrokerID = await getBrokerId();
-    let brokerRef="";
+    
     const q = query(collection(db,'Broker'),where("brokerId","==",BrokerID));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((docs)=>{
@@ -51,30 +55,63 @@ const Itable = () => {
       const docSnapshots = await getDocs(docRef);
 
       setD(docSnapshots.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+      return docSnapshots;
     }catch(e){
       console.log(e);
     }
+    
   }
 
-  async function generateCertificate(id){
-    const docRef = doc(db, 'Broker', user.uid, 'clients', id);
-    const docSnapshot = await getDoc(docRef);
+  async function generateCertificate(id) {
+    const docSnapshots = await getData();
+    console.log(docSnapshots);
+    let name = '';
+    let email = '';
+    docSnapshots.forEach((docs) => {
+        name = docs.data().clientfName;
+        email = docs.data().clientEmail;
+    });
 
-    const name = docSnapshot.data().clientfName;
-    const email = docSnapshot.data().clientEmail;
     const useRef = id;
     const body = {
-      name,
-      email,
-      useRef
-    }
+        name,
+        email,
+        useRef
+    };
+
     console.log("Inside generateCertificate function");
 
-    const res = await axios.post('http://localhost:8080/getusercertificate', { body });    
-    console.log(res.data)
-    toast.success('Certificate Generated Successfully for '+name); 
+    const res = await axios.post('http://localhost:8080/getusercertificate', { body });
+    console.log(res.data);
+    toast.success('Certificate Generated Successfully for ' + name);
+}
 
-  }
+
+async function revokeCertificate(id){
+  const docSnapshots = await getData();
+    console.log(docSnapshots);
+    let name = '';
+    let email = '';
+    docSnapshots.forEach((docs) => {
+        name = docs.data().clientfName;
+        email = docs.data().clientEmail;
+    });
+
+    const useRef = id;
+    const body = {
+        name,
+        email,
+        useRef
+    };
+
+    console.log("Inside generateCertificate function");
+
+    const res = await axios.post('http://localhost:8080/revokecertificate', { body });
+    console.log(res.data);
+    toast.success('Certificate Revoked Successfully for ' + name);
+}
+
+
   
 
   useEffect(()=>{
@@ -107,7 +144,7 @@ const Itable = () => {
                 <button className="bg-blue-500 text-white py-1 px-2 mr-2" onClick={async ()=> {await generateCertificate(item.id)}}>
                   Generate Certificate
                 </button>
-                <button className="bg-red-500 text-white py-1 px-2">
+                <button className="bg-red-500 text-white py-1 px-2" onClick={async ()=>{await revokeCertificate(item.id)}}>
                   Revoke
                 </button >
                 
