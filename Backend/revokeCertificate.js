@@ -4,7 +4,7 @@ const { registerFont, createCanvas, loadImage } = require('canvas');
 // Register the font
 registerFont('./arial/arial.ttf', { family: 'Arial' });
 
-async function generateCertificate(name) {
+async function revokeCertificate(name) {
     // Create the canvas
     const canvas = createCanvas(1414, 2000);
     const ctx = canvas.getContext('2d');
@@ -35,7 +35,7 @@ async function generateCertificate(name) {
     fs.writeFileSync('./Certificates/' + name + '.png', buffer);
 }
 
-module.exports = generateCertificate;
+module.exports = revokeCertificate;
 
 // Example usage
-generateCertificate('Siddhant');
+// generateCertificate('Siddhant');
