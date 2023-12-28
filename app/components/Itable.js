@@ -5,6 +5,7 @@ import { UserAuth } from "../context/AuthContext";
 import { db } from '../firebase';
 import Link from 'next/link';
 
+
 const Itable = () => {
   //  const router = useRouter()
 
@@ -55,6 +56,9 @@ const Itable = () => {
     }
   }
 
+  function generateCertificate(){
+    console.log("Inside generateCertificate function"); 
+  }
   
 
   useEffect(()=>{
@@ -84,9 +88,9 @@ const Itable = () => {
               <td className="py-2 px-4 border-b">{item.clientphone}</td>
               <td className="py-2 px-4 border-b">{item.clientDoc}</td>
               <td className="py-2 px-4 border-b">                
-                <Link href='https://azure-attractive-ladybug-812.mypinata.cloud/ipfs/QmYo1U64i48fywxALh961zWs5snkNnHPKQwBZRyzVXag5f'><button className="bg-blue-500 text-white py-1 px-2 mr-2">
+                <button className="bg-blue-500 text-white py-1 px-2 mr-2" onClick={async ()=> {await generateCertificate}}>
                   Generate Certificate
-                </button></Link>
+                </button>
                 
               </td>
             </tr>

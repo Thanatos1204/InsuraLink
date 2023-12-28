@@ -1,59 +1,37 @@
 const nodemailer = require('nodemailer');
-const fs = require('fs');
+const fs = require('fs').promises; // Importing fs with promises support
+const { deleteFile } = require('./deleteFile.js');
 
-fs.readFile('insuralink.html', 'utf8', function(err, html){
-  if(err) throw err;
+async function sendEmailToRecipient(emailAddress, receiverName) {
+  try {
+    const html = await fs.readFile('insuralink.html', 'utf8');
 
-  let transporter = nodemailer.createTransport({
+    const transporter = nodemailer.createTransport({
       service: 'hotmail',
       auth: {
-          user: 'Insuralink-Certitech@outlook.com',
-          pass: 'djsanghvi1234'
+        user: 'Insuralink-Certitech@outlook.com',
+        pass: 'djsanghvi1234'
       }
-  });
+    });
 
-  let mailOptions = {
+    const mailOptions = {
       from: 'Insuralink-Certitech@outlook.com',
-        to: 'bhargavpandit01@gmail.com',
+      to: emailAddress,
       subject: 'Certitech - Your Documents',
       html: html,
-      attachments: [{
-          filename: 'Rohan Malohtra.jpg',
-          path: './Certificates/Rohan Malohtra.jpg',
-      },
-      {
-        filename: 'facebook2x.png',
-        path: './images/facebook2x.png',
-        cid: 'image@facebook2x.png'
-      },
-      {
-        filename: 'twitter2x.png',
-        path: './images/twitter2x.png',
-        cid: 'image@twitter2x.png'
-      },
-      {
-        filename: 'linkedin2x.png',
-        path: './images/linkedin2x.png',
-        cid: 'image@linkedin2x.png'
-      },
-      {
-        filename: 'instagram2x.png',
-        path: './images/instagram2x.png',
-        cid: 'image@instagram2x.png'
-      },
-      {
-        filename: 'Screenshot_2023-12-26_194703.png',
-        path: './images/Screenshot_2023-12-26_194703.png',
-        cid: 'image@Screenshot_2023-12-26_194703.png'
-       }
-    ]
-  };
+      attachments: [
+        // Your attachments
+      ]
+    };
 
-  transporter.sendMail(mailOptions, function(error, info){
-      if (error) {
-        console.log(error);
-      } else {
-        console.log('Email sent: ' + info.response);
-      }
-  });
-});
+    const info = await transporter.sendMail(mailOptions);
+
+    console.log(`Email sent to ${receiverName} (${emailAddress}): ${info.response}`);
+
+    await deleteFile(`./Certificates/${receiverName}.png`);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+module.exports = sendEmailToRecipient;

@@ -1,26 +1,26 @@
 
 const ethersFunctions = require('./StoreHashOnChain.js');
-const { storeUserHash, getUserHash, getUserCertificateHash,storeUserCertificateHash,contract, contractAddress, contractABI, connectedWallet, provider, wallet, privateKe } = ethersFunctions;
-const { collection, getDocs,getDoc,doc} = require('firebase/firestore')
+const { storeUserHash, getUserHash, getUserCertificateHash, storeUserCertificateHash, contract, contractAddress, contractABI, connectedWallet, provider, wallet, privateKe } = ethersFunctions;
+const { collection, getDocs, getDoc, doc } = require('firebase/firestore')
 const db = require('./firebase.js')
 const { encryptFile, decryptFile } = require('./EncryptDecrypt.js');
 const fs = require('fs').promises;
 const pinFileToIPFS = require('./pinFileToIPFS.js')
 const pinImageToIPFS = require('./pinImageToIPFS.js')
 // const { storeUserHash, getUserHash, contract,contractAddress,contractABI,connectedWallet,provider,wallet,privateKey } = require('./StoreHashOnChain.js')   
-const { ethers } = require('ethers');
+// const { ethers } = require('ethers');
 // const fs = require('fs');
 require('dotenv').config();
-const { JsonRpcProvider } = require('ethers/providers');
+// const { JsonRpcProvider } = require('ethers/providers');
 const downloadFile = require('./FetchFromIPFS.js');
 const generateCertificate = require('./generateCertificate.js');
-const useRef = 'rDrOXPjQ51hQeu5tBXGs'
-const FormData = './Data/johndoe.json'
+// const useRef = 'rDrOXPjQ51hQeu5tBXGs'
+// const FormData = './Data/johndoe.json'
 // delete a file 
 const { deleteFile } = require('./deleteFile.js');
-const { get } = require('http');
+// const { get } = require('http');
 // const fs = require('fs');
-
+const sendEmailToRecipient = require('./mailer.js');
 
 async function addUserDetails(useRef) {
     try {
@@ -54,22 +54,22 @@ async function addUserDetails(useRef) {
 // addUserDetails(useRef, FormData)
 
 
-    async function fetchUserDetails(useRef) {
-        const UserKey = await readKey(useRef);
-        const IpfsHash = await getUserHash(useRef);
-        await downloadFile(IpfsHash, `${useRef}`);
-        await decryptFile(`${useRef}.txt`, UserKey, `${useRef}_decrypt.json`);
-        return Promise.resolve(); // Resolve the Promise after all operations are completed
-      }
-      
-  
+async function fetchUserDetails(useRef) {
+    const UserKey = await readKey(useRef);
+    const IpfsHash = await getUserHash(useRef);
+    await downloadFile(IpfsHash, `${useRef}`);
+    await decryptFile(`${useRef}.txt`, UserKey, `${useRef}_decrypt.json`);
+    return Promise.resolve(); // Resolve the Promise after all operations are completed
+}
+
+
 
 // fetchUserDetails('JVuuma0mzMuiGh2bdH5g')
 async function genCertificate(name, useRef) {
     const certificate = await generateCertificate(name)
+    const email = sendEmailToRecipient('Bhavikpunmiya01@gmail.com', name)
     const imageHash = await pinImageToIPFS(`./Certificates/${name}.png`)
-    const store =  await storeUserCertificateHash(useRef, imageHash)
-    await deleteFile(`./Certificates/${name}.png`)
+    const store = await storeUserCertificateHash(useRef, imageHash)
     return imageHash
 }
 // genCertificate('Bhargav Pandit', 'JVuuma0mzMuiGh2bdH5g')
@@ -79,14 +79,14 @@ async function genCertificate(name, useRef) {
 async function readKey(userRef) {
     const docSnapshot = await getDoc(doc(db, "Client", userRef));
 
-   if (!docSnapshot.exists()) {
-       console.log("No such document!");
-       return null;
-   } else {
-       const data = docSnapshot.data();
-       console.log(data)
-       return data.key;
-   }
+    if (!docSnapshot.exists()) {
+        console.log("No such document!");
+        return null;
+    } else {
+        const data = docSnapshot.data();
+        console.log(data)
+        return data.key;
+    }
 }
 // readKey('fpRZnoX95eVBECjNKiodUeOzAd83')
 
@@ -111,4 +111,4 @@ async function readKey(userRef) {
 
 
 
-module.exports = {addUserDetails, fetchUserDetails, genCertificate } 
+module.exports = { addUserDetails, fetchUserDetails, genCertificate } 
