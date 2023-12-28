@@ -29,7 +29,9 @@ function Applyinsurance() {
    const [pdfurl,setPdfurl]=useState('')
    const [pdf,setPdf]=useState()
    
-   const handlesubmit = async () => {
+   const handleSubmit = async (event) => {
+    console.log("Inside Handle Submit")
+    event.preventDefault();
     try {      
        let imgBase64 = await new Promise((resolve, reject) => {
         let reader = new FileReader();
@@ -165,7 +167,7 @@ function Applyinsurance() {
         <h3>
                 Fill Your Details
             </h3>
-            <form>
+            <form onSubmit={async (e)=>await handleSubmit(e)}>
     <div className="row">
       <h6>Personal Information</h6>
       <div className='row'>
@@ -185,9 +187,7 @@ function Applyinsurance() {
       <div className='row'>
       <div className='col'>
       <div className="input-group input-group-icon">
-        <input type="text" placeholder="Gender" value={gender} onChange={async (event) => {
-        await putBroker();
-        }}/>
+        <input type="text" placeholder="Gender" value={gender} onChange={(event) => setGender(event.currentTarget.value)}/>
         <div className="input-icon"><i className="fa fa-user"></i></div>
       </div>
       </div>
@@ -201,7 +201,7 @@ function Applyinsurance() {
       <div className='row'>
       <div className='col'>
       <div className="input-group input-group-icon">
-        <input type="text" placeholder="Martial Status" value={martial} onChange={async (event) => (setMartial(event.currentTarget.value), await handlesubmit())}/>
+        <input type="text" placeholder="Martial Status" value={martial} onChange={(event) => (setMartial(event.currentTarget.value))}/>
         <div className="input-icon"><i className="fa fa-user"></i></div>
       </div>
       </div>
@@ -252,8 +252,8 @@ function Applyinsurance() {
       </div>
       </div>
       
+  <button type='submit' className='btn1'>Submit</button>
   </form>
-  <button type='button' className='btn1'  onClick={handlesubmit} >Submit</button>
 
         </section>
     
