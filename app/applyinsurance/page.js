@@ -147,10 +147,6 @@ function Applyinsurance() {
       
     }
   }
-
-
-
-
   return (<>
     <Toaster />
     <div className='applyinsurance'>
@@ -247,10 +243,7 @@ function Applyinsurance() {
   <button type='submit' className='btn1'>Submit</button>
   </form>
 
-        </section>
-     
-   
-     
+        </section>  
 
     </div>
     </>
