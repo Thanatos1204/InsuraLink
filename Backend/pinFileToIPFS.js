@@ -2,7 +2,7 @@ const axios = require('axios')
 const FormData = require('form-data')
 const fs = require('fs')
 require('dotenv').config()
-
+const {deleteFile} = require('./deleteFile.js')
 const JWT = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiIzZDFmYjIxZi04YmJmLTQ1NTEtOTNhYi03ZTFiZDliY2I0NWEiLCJlbWFpbCI6ImJoYXZpa3B1bm1peWFAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInBpbl9wb2xpY3kiOnsicmVnaW9ucyI6W3siaWQiOiJGUkExIiwiZGVzaXJlZFJlcGxpY2F0aW9uQ291bnQiOjF9LHsiaWQiOiJOWUMxIiwiZGVzaXJlZFJlcGxpY2F0aW9uQ291bnQiOjF9XSwidmVyc2lvbiI6MX0sIm1mYV9lbmFibGVkIjpmYWxzZSwic3RhdHVzIjoiQUNUSVZFIn0sImF1dGhlbnRpY2F0aW9uVHlwZSI6InNjb3BlZEtleSIsInNjb3BlZEtleUtleSI6IjE2NDdmZmMwNTMxMzdjMzhkYTEwIiwic2NvcGVkS2V5U2VjcmV0IjoiOTJkOWE5MGIyNDhjMjBlMzk0MTRlMTRiNTVkOWM5ZDEzZjY3YTkxNTZhZjI1NmY1MmY0MWFjYTc2YzYxYmQ4ZiIsImlhdCI6MTcwMjk3MDg5MH0.MrVQgBiQUEFdVzGOkExk7iC6UXJOnbc7XNT2ZTh4Ce0`
 
 const pinFileToIPFS = async (path) => {
@@ -32,12 +32,13 @@ const pinFileToIPFS = async (path) => {
           'Authorization': `Bearer ${JWT}`
         }
       });
+      deleteFile(`${path}.txt`)
+      deleteFile(`${path}.json`)
       return res.data.IpfsHash;
     } catch (error) {
       console.log(error);
     }
-
-   
+    
 }
 
 module.exports = pinFileToIPFS;

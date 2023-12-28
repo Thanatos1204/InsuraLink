@@ -7,19 +7,10 @@ const { encryptFile, decryptFile } = require('./EncryptDecrypt.js');
 const fs = require('fs').promises;
 const pinFileToIPFS = require('./pinFileToIPFS.js')
 const pinImageToIPFS = require('./pinImageToIPFS.js')
-// const { storeUserHash, getUserHash, contract,contractAddress,contractABI,connectedWallet,provider,wallet,privateKey } = require('./StoreHashOnChain.js')   
-// const { ethers } = require('ethers');
-// const fs = require('fs');
 require('dotenv').config();
-// const { JsonRpcProvider } = require('ethers/providers');
 const downloadFile = require('./FetchFromIPFS.js');
 const generateCertificate = require('./generateCertificate.js');
-// const useRef = 'rDrOXPjQ51hQeu5tBXGs'
-// const FormData = './Data/johndoe.json'
-// delete a file 
 const { deleteFile } = require('./deleteFile.js');
-// const { get } = require('http');
-// const fs = require('fs');
 const sendEmailToRecipient = require('./mailer.js');
 
 async function addUserDetails(useRef) {
@@ -41,8 +32,8 @@ async function addUserDetails(useRef) {
         }
 
         const IPFSObject = await pinFileToIPFS(useRef);
-        await storeUserHash(useRef, IPFSObject);
-        await deleteFile(`${useRef}.txt`);
+        storeUserHash(useRef, IPFSObject);
+        
 
         console.log('User created successfully');
     } catch (error) {

@@ -1,0 +1,65 @@
+{
+  "PersonalInformation": {
+    "FullName": "John Doe",
+    "DateOfBirth": "1985-07-15",
+    "Gender": "Male",
+    "Nationality": "US",
+    "MaritalStatus": "Single"
+  },
+  "ContactInformation": {
+    "EmailAddress": "johndoe@example.com",
+    "PhoneNumbers": [
+      "123-456-7890",
+      "987-654-3210"
+    ],
+    "MailingAddress": {
+      "Street": "123 Main St",
+      "City": "Anytown",
+      "State": "CA",
+      "PostalCode": "12345"
+    }
+  },
+  "IdentificationDetails": {
+    "GovernmentID": {
+      "Passport": "AB123456",
+      "DriverLicense": "DL987654"
+    },
+    "TaxIdentificationNumber": "123-45-6789"
+  },
+  "FinancialInformation": {
+    "BankAccountDetails": {
+      "AccountNumber": "1234567890",
+      "BankName": "Example Bank",
+      "PaymentMethodPreferences": [
+        "Credit Card",
+        "ACH"
+      ]
+    }
+  },
+  "HealthDetails": {
+    "MedicalHistory": "No major medical history",
+    "Allergies": [
+      "Peanuts",
+      "Pollens"
+    ],
+    "PreExistingConditions": [
+      "High Blood Pressure"
+    ]
+  },
+  "OccupationAndEmploymentInformation": {
+    "Occupation": "Software Engineer",
+    "EmployerDetails": {
+      "CompanyName": "XYZ Corp",
+      "Address": "456 Tech Ave, TechCity, CA"
+    }
+  },
+  "EmergencyContact": {
+    "Name": "Jane Smith",
+    "RelationshipWithClient": "Friend",
+    "ContactNumber": "555-123-4567"
+  },
+  "AuthenticationData": {
+    "Username": "johndoe123",
+    "Password": "examplepassword123"
+  }
+}
