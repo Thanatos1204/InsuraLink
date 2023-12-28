@@ -5,16 +5,33 @@ const fs = require('fs');
 const algorithm = 'aes-256-ctr';
 
 
-const encryptFile = async (inputFile, secretKey, outputFile) => {
-  const iv = await crypto.randomBytes(16);
-  const cipher = await crypto.createCipheriv(algorithm, secretKey, iv);
+const encryptFile = (inputFile, secretKey, outputFile) => {
+  return new Promise((resolve, reject) => {
+      crypto.randomBytes(16, (err, iv) => {
+          if (err) {
+              reject(err);
+              return;
+          }
 
-  const input = await fs.createReadStream(inputFile);
-  const output = await fs.createWriteStream(outputFile);
+          const cipher = crypto.createCipheriv(algorithm, secretKey, iv);
+          const input = fs.createReadStream(inputFile);
+          const output = fs.createWriteStream(outputFile);
 
-  await output.write(iv);
+          output.on('error', reject);
+          input.on('error', reject);
 
-  await input.pipe(cipher).pipe(output);
+          output.write(iv, (writeErr) => {
+              if (writeErr) {
+                  reject(writeErr);
+                  return;
+              }
+
+              input.pipe(cipher).pipe(output).on('finish', () => {
+                  resolve(); // resolve the promise once the file has been written
+              });
+          });
+      });
+  });
 };
 
 

@@ -23,13 +23,13 @@ async function addUserDetails(useRef) {
         console.log(`file Encrypted with ${useRef}.txt`);
 
         // Check if file exists after encryption
-        try {
-            await fs.access(`${useRef}.txt`);
-            console.log('file exists');
-        } catch (error) {
-            console.error('file does not exist');
-            throw error; // Propagate the error up if file doesn't exist
-        }
+        // try {
+        //     //await fs.access(`${useRef}.txt`);
+        //     console.log('file exists');
+        // } catch (error) {
+        //     console.error('file does not exist');
+        //     throw error; // Propagate the error up if file doesn't exist
+        // }
 
         const IPFSObject = await pinFileToIPFS(useRef);
         await storeUserHash(useRef, IPFSObject);
