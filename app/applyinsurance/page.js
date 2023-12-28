@@ -64,8 +64,8 @@ function Applyinsurance() {
         }
       };
       
-      const res = await axios.post('http://localhost:8080/adduserdetails', { body });
-      Toaster.success('User Successfully Applied for Insurance');
+      const res = await axios.post('https://backend-alisdej34q-uc.a.run.app/adduserdetails', { body });
+      
    
     } catch (err) {
       console.log(err, "Error in vendor page");

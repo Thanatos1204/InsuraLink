@@ -55,6 +55,8 @@ const Itable = () => {
     }
   }
 
+  
+
   useEffect(()=>{
     console.log("IN USE EFFECT",d);
     getData();
