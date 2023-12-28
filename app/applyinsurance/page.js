@@ -4,10 +4,12 @@ import React, { useState } from 'react'
 import './applyinsurance.css'
 import Link from 'next/link'
 import { UserAuth } from "../context/AuthContext";
-import { Toaster } from 'react-hot-toast';
 import axios from 'axios'
 import {  collection, doc, getDoc, getDocs, query, setDoc, where } from 'firebase/firestore';
 import { db } from "../firebase";
+import toast, { Toaster } from 'react-hot-toast';
+
+
 
 function Applyinsurance() {
 
@@ -67,9 +69,10 @@ function Applyinsurance() {
       };
       
       const res = await axios.post('https://backend-alisdej34q-uc.a.run.app/adduserdetails', { body });
-      
+      toast.success('Your form has successfully submited');
    
     } catch (err) {
+      toast.error('Your form has not submited');
       console.log(err, "Error in vendor page");
     }
    };
@@ -134,23 +137,26 @@ function Applyinsurance() {
     console.log('About to Push');
     await setDoc(docRef,data);
     console.log('Pushed');
+    toast.success('You did it!');
 
     }catch(e){
+    
       console.log(e);
+      
     }
   }
 
 
 
 
-  return (
+  return (<>
+    <Toaster />
     <div className='applyinsurance'>
-     
+    
       <head>
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"/>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
       </head>
-      <Toaster/>
       <header>
             <Link className="logo" href="/">InsuraLink</Link>
             <nav>
@@ -256,11 +262,12 @@ function Applyinsurance() {
   </form>
 
         </section>
-    
-
+     
+   
      
 
     </div>
+    </>
   )
 }
 
