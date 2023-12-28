@@ -91,6 +91,9 @@ const Itable = () => {
                 <button className="bg-blue-500 text-white py-1 px-2 mr-2" onClick={async ()=> {await generateCertificate}}>
                   Generate Certificate
                 </button>
+                <button className="bg-red-500 text-white py-1 px-2">
+                  Revoke
+                </button >
                 
               </td>
             </tr>
