@@ -1,5 +1,5 @@
 const express = require('express');
-const { addUserDetails, fetchUserDetails,genCertificate,revoCertificate } = require('./main.js'); // replace with your contract file path
+const { addUserDetails, fetchUserDetails,genCertificate,revoCertificate, fetchuserCertificate } = require('./main.js'); // replace with your contract file path
 const cors = require('cors')
 const bodyParser = require('body-parser');
 const fs = require('fs');
@@ -104,10 +104,10 @@ app.post('/revokecertificate', async (req, res) => {
 
 app.post('/fetchUserCertificate', async (req, res) => {
   try {
-    const { userRef } = req.body; // Assuming userRef is sent in the request body
+    const { useRef } = req.body; // Assuming userRef is sent in the request body
 
     // Call the function to fetch user certificate hash
-    const hash = await fetchUserCertificateHash(userRef);
+    const hash = await fetchuserCertificate(useRef);
 
     // Assuming the IPFS base URL
     const string = 'https://azure-attractive-ladybug-812.mypinata.cloud/ipfs/';

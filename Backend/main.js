@@ -125,4 +125,4 @@ async function readKey(userRef) {
 
 
 
-module.exports = { addUserDetails, fetchUserDetails, genCertificate, revoCertificate } 
+module.exports = { addUserDetails, fetchUserDetails, fetchuserCertificate, genCertificate, revoCertificate } 
