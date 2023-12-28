@@ -49,7 +49,7 @@ app.post('/adduserdetails', async (req, res) => {
   try {
     console.log('creating user inside index file ')
     await addUserDetails(useRef);
-    await console.log('user created')
+    console.log('user created')
     res.status(200).send('User details added successfully');
 
   } catch (error) {
@@ -65,11 +65,10 @@ app.post('/getuserdetails', async (req, res) => {
 
     // Now read the file asynchronously
     try {
-      const data = await fetchUserDetails(useRef); 
-      console.log(data.toString())
+      const data = await fetchUserDetails(useRef);     
       const jsonData = JSON.parse(data.toString());
       console.log(jsonData);
-      await res.status(200).send(jsonData);
+      res.status(200).send(jsonData);
     } catch (err) {
       console.error('Error reading file:', err);
       res.status(500).send('Error reading file');

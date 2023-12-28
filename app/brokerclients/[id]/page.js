@@ -23,7 +23,7 @@ function Detailspage() {
     const fetchData = async () => {
       setIsLoading(true); // Set loading to true before starting the fetch
       try {
-        const response = await axios.post('https://backend-alisdej34q-uc.a.run.app/getuserdetails', { useRef: params.id});
+        const response = await axios.post('http://localhost:8080/getuserdetails', { useRef: params.id});
         setData(response.data);
         console.log(data)
       } catch (error) {
@@ -40,7 +40,7 @@ function Detailspage() {
  
   return (
     <div className='detailspage'>
-        <Navbar/>
+        <Navbar typeofuser={'broker'}/>
         <div className='details'>
         {isLoading ? (
         <p>Loading...</p> // Show loading text while fetching data
