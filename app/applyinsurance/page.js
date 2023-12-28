@@ -68,7 +68,7 @@ function Applyinsurance() {
         }
       };
       
-      const res = await axios.post('https://backend-alisdej34q-uc.a.run.app/adduserdetails', { body });
+      const res = await axios.post('http://localhost:8080/adduserdetails', { body });
       toast.success('Your form has successfully submited');
    
     } catch (err) {
@@ -129,15 +129,16 @@ function Applyinsurance() {
     console.log(imgBase64);
 
     const data = {
-      clientfName: firstname,
+      clientfName: firstname + ' ' + Lastname,
       clientDocType: 'Aadhar Card',
+      clientEmail: email,
       clientphone: contact,
       clientDoc: 'Aadhar Card.pdf'
     }
     console.log('About to Push');
     await setDoc(docRef,data);
     console.log('Pushed');
-    toast.success('You did it!');
+    
 
     }catch(e){
     
