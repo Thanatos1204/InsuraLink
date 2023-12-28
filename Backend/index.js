@@ -1,7 +1,7 @@
 const express = require('express');
 const { addUserDetails, fetchUserDetails,genCertificate } = require('./main.js'); // replace with your contract file path
 const cors = require('cors')
-
+const bodyParser = require('body-parser');
 const fs = require('fs');
 const { userInfo } = require('os');
 const FormData = './Data/johndoe.json'
@@ -11,13 +11,21 @@ const { deleteFile } = require('./deleteFile.js');
 const app = express();
 app.use(express.json());
 
+
+
+
+app.use(cors({
+  origin: 'http://localhost:3000' // your client's origin
+}))
 // Define a route to add user details
-app.use((req, res, next) => {
-  req.header("Access-Control-Allow-Origin", "")
-  req.header("Access-Control-Allow-Headers", "")
-  next()
-})
-app.use(cors())
+// app.use((req, res, next) => {
+//   req.header("Access-Control-Allow-Origin", "")
+//   req.header("Access-Control-Allow-Headers", "")
+//   next()
+// })
+app.use(bodyParser.json({ limit: '100mb' })); // Increase the limit
+app.use(bodyParser.urlencoded({ limit: '100mb', extended: true }));
+
 
 
 
@@ -27,7 +35,7 @@ app.post('/adduserdetails', async (req, res) => {
   console.log(jsonData)
       const jsonString = JSON.stringify(jsonData, null, 2);
     console.log()
-    await fs.writeFile(`${useRef}.json`, jsonString, (err) => {
+    await fs.promises.writeFile(`${useRef}.json`, jsonString, (err) => {
       if (err) {
         console.error('Error creating JSON file:', err);
         // Handle the error here
