@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import toast, { Toaster } from 'react-hot-toast';
+import { Player, Controls } from "@lottiefiles/react-lottie-player";
 
 export default function login(){
 
@@ -60,6 +61,28 @@ export default function login(){
     }, [user]);
 
     return(<>
+
+        <div className="animatedgif">
+                        <Player
+                        autoplay
+                        speed={1.5}
+                        loop
+                        src="https://lottie.host/6586a1f8-60e6-4768-b44e-11c940439ee2/aeqx72AMS2.json"
+                        style={{ backgroundColor: '#fff',
+                        backgroundSize: 'cover',
+                        backgroundRepeat: 'no-repeat',
+                        width: '100vw',
+                        height: '100vh',
+                        margin: '0px',
+                        padding: '0px',
+                        //float: 'right',
+                        //zIndex: '0',
+                            position: 'relative',  // Use 'fixed' to keep it fixed relative to the viewport
+                        //    top: '0',
+                        right: '-10vw',  
+                    }}
+                                        /> 
+                    </div>
 
  
     <Toaster style= {

@@ -11,13 +11,13 @@ body{
     
    
     overflow: hidden;
-    background-color:#fff;
+    /* background-color:#fff;
     background: url("../../public/2.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
     /* background-color:rgba(39, 39, 39, 0.4); */
-    background-blend-mode: overlay;
+    /* background-blend-mode: overlay; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -104,20 +104,24 @@ body{
     backdrop-filter: blur(16px) saturate(180%);
     -webkit-backdrop-filter: blur(16px) saturate(180%);
     background-color: rgba(247, 244, 244, 0.349);
-    border-radius: 12px;
-    border: 1px solid rgba(77, 79, 82, 0.368);
-    padding: 50px;
+    border-radius: 50px;
+    min-width: 500px;    
+    padding: 2rem;
+    position: absolute;
 }
 #register{
     backdrop-filter: blur(16px) saturate(180%);
     -webkit-backdrop-filter: blur(16px) saturate(180%);
     background-color: rgba(247, 244, 244, 0.349);
     border-radius: 50px;
-    right: -520px;
-    width: 500px;
+    margin: auto auto;
+    min-width: 500px;
     display: flex;
     flex-direction: column;
     transition: .5s ease-in-out;
+    z-index: 1000000;
+    position: absolute;
+    padding: 2rem;
 }
 /* .top span{
     color: #fff;
@@ -171,10 +175,10 @@ body{
     color: black;
     height: 45px;
     width: 100%;
-    border: none;
+    border: 1px solid rgb(152, 152, 152);
     border-radius: 30px;
     outline: none;
-    background: rgba(255, 255, 255, 0.7);
+    background: rgb(255, 255, 255);
     cursor: pointer;
     transition: .3s ease-in-out;
     margin: 10px 0px;
