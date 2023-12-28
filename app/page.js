@@ -12,6 +12,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Player, Controls } from "@lottiefiles/react-lottie-player";
+import Typewriter from 'typewriter-effect';
 
 // import required modules
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
@@ -83,6 +84,12 @@ const testUpload = () =>{
   }
 }
 
+/*
+* Created with https://www.css-gradient.com
+* Gradient link: https://www.css-gradient.com/?c1=46e821&c2=25af4f&gt=l&gd=dtl
+*/
+
+
 
 
   return (
@@ -104,8 +111,23 @@ const testUpload = () =>{
         </header>
         <div className='bannersection'>
             <div className='slogan'>
-              <div className='mainslogan'>
-               <p><span>Protect</span> Your Future .</p>
+              <div className='mainslogan'>               
+               <Typewriter
+              options={{              
+                autoStart: true,
+                loop: true
+              }}
+              onInit={(typewriter) => {
+                typewriter.typeString(
+                  '<span style="color: #46E821; background: -webkit-linear-gradient(135deg, #46E821, #25AF4F); background-clip: text; -webkit-background-clip: text; text-align: center; text-fill-color: transparent; -webkit-text-fill-color: transparent">Protect Your Future.</span>')
+                  .callFunction(() => {
+                    console.log('String typed out!');
+                  })
+                  .pauseFor(2500)
+                  .deleteAll()
+                  .pauseFor(1500)
+                  .start();
+              }} />                 
               </div>
               <div className='subslogan'>
               We understand that unexpected events can have a major impact on your life. That's why we're committed to providing comprehensive insurance coverage to protect you and your assets.
