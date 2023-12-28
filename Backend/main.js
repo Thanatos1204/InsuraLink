@@ -84,7 +84,7 @@ async function revoCertificate(name, useRef, email){
 
 }
 
-async function fetchuserCertificate(){
+async function fetchuserCertificate(useRef){
     const imageHash = await getUserCertificateHash(useRef)
     return imageHash    
 }
@@ -125,4 +125,4 @@ async function readKey(userRef) {
 
 
 
-module.exports = { addUserDetails, fetchUserDetails, genCertificate, revoCertificate } 
+module.exports = { addUserDetails, fetchUserDetails, genCertificate, revoCertificate,fetchuserCertificate } 
