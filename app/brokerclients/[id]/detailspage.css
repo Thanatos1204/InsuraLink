@@ -4,10 +4,11 @@
 .details{
     margin: 50px auto;
     width: 40%;
-    background-color: rgb(226, 226, 226);
+    background-color: rgb(244, 244, 244);
     padding: 30px;
-    border: 1px solid #808080;
+    border: 2px solid #009879;
     border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.075);
 }
 .details p{
     font-weight: 700;
