@@ -1,39 +1,41 @@
 const fs = require('fs');
-const { createCanvas, loadImage } = require('canvas');
-const opentype = require('opentype.js');
+const { registerFont, createCanvas, loadImage } = require('canvas');
+
+// Register the font
+registerFont('./arial/arial.ttf', { family: 'Arial' });
 
 async function generateCertificate(name) {
- const canvas = await createCanvas(1414, 2000);
- const ctx = await canvas.getContext('2d');
+    // Create the canvas
+    const canvas = createCanvas(1414, 2000);
+    const ctx = canvas.getContext('2d');
 
- const img = await loadImage('Insurance Template.png');
- ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    // Load the background image
+    const img = await loadImage('Insurance Template.png');
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
- // Load the font file
- let font = opentype.loadSync('./arial/arial.ttf');
- console.log(font.names.fontFamily.en);
+    // Set the font for the large text
+    ctx.font = '80px Arial';
+    ctx.fillStyle = 'rgb(62, 108, 118)';
 
-ctx.font = font;
- ctx.fillStyle = 'rgb(62, 108, 118)';
+    // Measure the width of the text and calculate the x coordinate for centering
+    const textWidth = ctx.measureText(name).width;
+    const x = (canvas.width - textWidth) / 2;
 
- // Measure the width of the text
- const textWidth = ctx.measureText(name).width;
+    // Draw the name at the calculated position
+    ctx.fillText(name, x, 760);
 
- // Calculate the x coordinate for centering the text
- const x = (canvas.width - textWidth) / 2;
+    // Set the font for the smaller text and draw it
+    ctx.font = '22px Arial';
+    ctx.fillStyle = 'rgb(65, 75, 59)';
+    ctx.fillText(name, 100, 282);
+    ctx.fillText(name, 471, 366);
 
- // Draw the text at the calculated x coordinate
- ctx.fillText(name, x, 760);
-//  console.log(font)
- ctx.font = font;
- ctx.fillStyle = 'rgb(65, 75, 59)';
- ctx.fillText(name, 100, 282);
- ctx.fillText(name, 471, 366);
-
- const buffer = canvas.toBuffer('image/png');
- await fs.writeFileSync('./Certificates/' + name + '.png', buffer);
+    // Save the canvas to a file
+    const buffer = canvas.toBuffer('image/png');
+    fs.writeFileSync('./Certificates/' + name + '.png', buffer);
 }
 
 module.exports = generateCertificate;
 
-generateCertificate('Siddhant')
+// Example usage
+generateCertificate('Siddhant');
