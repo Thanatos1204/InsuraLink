@@ -5,6 +5,9 @@ import React, { useEffect, useState } from 'react';
 import { UserAuth } from "../context/AuthContext";
 import { db } from '../firebase';
 import { Link } from 'next/link';
+import './ctable.css'
+
+
 
 const BrokerTable = () => {
 
@@ -40,7 +43,7 @@ const BrokerTable = () => {
 
   return (
     <div className=" flex justify-around items-center py-10 overflow-x-auto">
-      <table className=" w-10/12 bg-#1EA887  color-white self-center text-center border">
+      <table className="content-table">
         <thead>
           <tr>
             <th className="py-2 px-4 border-b">Client Name</th>

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { UserAuth } from "../context/AuthContext";
 import { db } from '../firebase';
 import Link from 'next/link';
+import './ctable.css'
 
 const Ctable = () => {
   //  const router = useRouter()
@@ -63,8 +64,8 @@ const Ctable = () => {
 
   return (
     <div>
-       <div className="w-screen flex justify-around items-center py-10 px-20">
-      <table className=" w-full bg-white self-center text-center border border-gray-500">
+       <div className=" w-screen flex justify-around items-center py-10 px-20">
+      <table className="content-table">
       <thead>
           <tr>
             <th className="py-2 px-4 border-b">Insurance Company</th>
@@ -80,7 +81,17 @@ const Ctable = () => {
               <td className="py-2 px-4 border-b">{'Health'}</td>
               <td className="py-2 px-4 border-b">{'010'}</td>
               <td className="py-2 px-4 border-b">                
-                <Link href='https://azure-attractive-ladybug-812.mypinata.cloud/ipfs/QmYo1U64i48fywxALh961zWs5snkNnHPKQwBZRyzVXag5f'><button className="bg-blue-500 text-white py-1 px-2 mr-2">
+                <Link href='https://azure-attractive-ladybug-812.mypinata.cloud/ipfs/QmYo1U64i48fywxALh961zWs5snkNnHPKQwBZRyzVXag5f'><button className="bg-blue-500 text-white py-2 px-2 mr-2 rounded">
+                  View Certificate
+                </button></Link>   
+              </td>
+            </tr>
+            <tr >
+              <td className="py-2 px-4 border-b">{'MarshMcLennan'}</td>
+              <td className="py-2 px-4 border-b">{'Health'}</td>
+              <td className="py-2 px-4 border-b">{'010'}</td>
+              <td className="py-2 px-4 border-b">                
+                <Link href='https://azure-attractive-ladybug-812.mypinata.cloud/ipfs/QmYo1U64i48fywxALh961zWs5snkNnHPKQwBZRyzVXag5f'><button className="bg-blue-500 text-white py-2 px-2 mr-2 rounded">
                   View Certificate
                 </button></Link>   
               </td>
