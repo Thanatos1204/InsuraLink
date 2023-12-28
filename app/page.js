@@ -7,11 +7,11 @@ import Image from "next/image.js";
 import lander from '../public/Frame 7.png'
 import Footer from "./Footer.js";
 import { Swiper, SwiperSlide } from 'swiper/react';
-
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+import { Player, Controls } from "@lottiefiles/react-lottie-player";
 
 // import required modules
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
@@ -116,13 +116,21 @@ const testUpload = () =>{
 
             </div>
             <div className='sideimg'>
+
                 <div className='backgroundimg'>
                 <Image src={lander} className="landerimg"/>
-
             
                 </div>
-
-            </div>
+                <div className="animatedgif">
+                <Player
+                   autoplay
+                   speed={1.5}
+                   loop
+                   src="https://lottie.host/4df17f7b-c688-413e-a716-b4a48675abff/cq2p5fIVvX.json"
+                   style={{ height: "300px", width: "300px" }}
+                                 /> 
+               </div>
+               </div>
 
         </div>
         <div className="clienttype">
