@@ -38,4 +38,4 @@ async function generateCertificate(name) {
 module.exports = generateCertificate;
 
 // Example usage
-generateCertificate('King');
+// generateCertificate('Siddhant');
