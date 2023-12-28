@@ -11,7 +11,7 @@ async function generateCertificate(name) {
 
  // Load the font file
  let font = opentype.loadSync('./arial/arial.ttf');
- console.log(font.family);
+ console.log(font.familyName);
 
 ctx.font = `80px ${font.family}`;
  ctx.fillStyle = 'rgb(62, 108, 118)';
@@ -25,7 +25,7 @@ ctx.font = `80px ${font.family}`;
  // Draw the text at the calculated x coordinate
  ctx.fillText(name, x, 760);
 //  console.log(font)
- ctx.font = `22px ${font.family}`;
+ ctx.font = `22px ${font.familyName}`;
  ctx.fillStyle = 'rgb(65, 75, 59)';
  ctx.fillText(name, 100, 282);
  ctx.fillText(name, 471, 366);
