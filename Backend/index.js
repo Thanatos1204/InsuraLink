@@ -15,7 +15,7 @@ app.use(express.json());
 
 
 app.use(cors({
-  origin: 'http://localhost:3000' // your client's origin
+  origin: 'https://insura-link.vercel.app' // your client's origin
 }))
 // Define a route to add user details
 // app.use((req, res, next) => {
