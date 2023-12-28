@@ -84,6 +84,10 @@ async function revoCertificate(name, useRef, email){
 
 }
 
+async function fetchuserCertificate(){
+    const imageHash = await getUserCertificateHash(useRef)
+    return imageHash    
+}
 // 
 
 async function readKey(userRef) {

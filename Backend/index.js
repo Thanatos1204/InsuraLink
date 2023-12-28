@@ -102,6 +102,23 @@ app.post('/revokecertificate', async (req, res) => {
   }
 });
 
+app.post('/fetchUserCertificate', async (req, res) => {
+  try {
+    const { userRef } = req.body; // Assuming userRef is sent in the request body
+
+    // Call the function to fetch user certificate hash
+    const hash = await fetchUserCertificateHash(userRef);
+
+    // Assuming the IPFS base URL
+    const string = 'https://azure-attractive-ladybug-812.mypinata.cloud/ipfs/';
+
+    res.status(200).send(string + hash);
+  } catch (error) {
+    console.error('Error fetching user certificate hash:', error);
+    res.status(500).send('Error fetching user certificate hash');
+  }
+});
+
 const port = parseInt(process.env.PORT) || 8080;
 app.listen(port, () => {
   console.log(`helloworld: listening on port ${port}`);
