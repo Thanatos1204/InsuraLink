@@ -10,7 +10,7 @@ async function revokeCertificate(name) {
     const ctx = canvas.getContext('2d');
 
     // Load the background image
-    const img = await loadImage('Insurance Template.png');
+    const img = await loadImage('Invalid Insurance Template.png');
     ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
     // Set the font for the large text
