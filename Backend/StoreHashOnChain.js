@@ -7,7 +7,7 @@ const { JsonRpcProvider } = require('ethers/providers');
 
 
 
-    const privateKey = `08150b935518da450795c6f27ba31c9f2d5182842b3b218b6dce87c1e25edaf6`;
+    const privateKey = process.env.PRIVATE_KEY;
 
     // Create an account from the private key
     const wallet = new ethers.Wallet(privateKey);
