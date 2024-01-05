@@ -111,14 +111,14 @@ setDoc(doc(db, "InsuranceAgent", "user456"), agentDoc);
 ## Screenshots
 
 - Screenshot 1: Client Schema
-  ![Client Schema](![Alt text](image-1.png))
+  ![image](https://github.com/Thanatos1204/InsuraLink/assets/128181516/13938dea-b5ab-48ef-8d97-02d8f72040e5)
+
 
 - Screenshot 2: Broker Schema
-  ![Broker Schema](![Alt text](image-2.png))
+  ![image-2](https://github.com/Thanatos1204/InsuraLink/assets/128181516/ee725026-bb24-424a-bdf2-538f47d8041a)
+
+  ![image-1](https://github.com/Thanatos1204/InsuraLink/assets/128181516/c36d00bb-629a-49c2-b387-bdfc8ff8189f)
 
 - Screenshot 3: Insurance Agent Schema
-  ![Insurance Agent Schema](![Alt text](image-3.png))
+  ![image-3](https://github.com/Thanatos1204/InsuraLink/assets/128181516/146c04bc-2e1d-4fb8-8576-523f68aaffa3)
 
-  ![Alt text](image-4.png)
-
-Include actual screenshots of your Firestore dashboard or relevant code execution outputs in the designated spaces above.
