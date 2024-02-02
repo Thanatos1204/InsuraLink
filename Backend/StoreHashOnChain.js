@@ -23,7 +23,7 @@ const { JsonRpcProvider } = require('ethers/providers');
 
     // Replace with your contract address
     //0x6fb951f33e4e52ef0e9c1f78325a9223d7dd1f4d
-    const contractAddress = '0xBC33A5e0645afd2Ba0417EE80A82997d5faf6483';
+    const contractAddress = '0xbB431ef34523555C11381246FCcC20Be23453475';
 
     // Create a contract instance
     const contract = new ethers.Contract(contractAddress, contractABI, connectedWallet);

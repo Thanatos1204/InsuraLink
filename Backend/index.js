@@ -30,7 +30,7 @@ app.use(bodyParser.urlencoded({ limit: '100mb', extended: true }));
 
 
 
-app.post('/adduserdetails', async (req, res) => {
+app.post('/api/adduserdetails', async (req, res) => {
   const { useRef, jsonData } = req.body.body;
   console.log(jsonData)
       const jsonString = JSON.stringify(jsonData, null, 2);

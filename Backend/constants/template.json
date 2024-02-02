@@ -1,0 +1,60 @@
+{
+    "productID" : "69b84bd8e2b9d504c6eaed6e0eb3027c",
+    "jsonData" : {
+    "Product": {
+      "ProductID": "123456",
+      "ProductName": "Example Product",
+      "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "Category": "Electronics",
+      "Quantity": 100,
+      "ManufacturingDate": "2024-01-17",
+      "ExpiryDate": "2025-01-17",
+      "Manufacturer": {
+        "ManufacturerName": "Example Manufacturer",
+        "ManufacturerContact": "manufacturer@example.com"
+      },
+      "Distribution": {
+        "DistributorInfo": "Example Distributor",
+        "DispatchDate": "2024-01-18",
+        "TrackingID": "ABC123",
+        "Status": "In transit",
+        "AuthenticationCode": "XYZ789"
+      }
+    },
+    "CurrentLocation": {
+      "TrackingID": "ABC123",
+      "CurrentLocation": "Warehouse A",
+      "Timestamp": "2024-01-20 10:30:00",
+      "LogisticsDetails": {
+        "LogisticsCompany": "Logistics Express",
+        "ContactInformation": "logistics@example.com"
+      },
+      "EstimatedArrivalTime": "2024-01-22 15:00:00"
+    },
+    "HistoryOfLocation": {
+      "TrackingID": "ABC123",
+      "LocationHistory": [
+        {"Location": "Manufacturer Warehouse", "Timestamp": "2024-01-18 12:00:00"},
+        {"Location": "Distribution Center", "Timestamp": "2024-01-18 18:00:00"},
+        {"Location": "Warehouse A", "Timestamp": "2024-01-20 10:30:00"}
+      ],
+      "LogisticsDetails": {
+        "LogisticsCompany": "Logistics Express",
+        "ContactInformation": "logistics@example.com"
+      }
+    },
+    "Consumer": {
+      "Name": "John Doe",
+      "ContactInformation": "john.doe@example.com",
+      "DeliveryAddress": "123 Main Street, Cityville",
+      "ProductDetails": {
+        "ProductName": "Example Product",
+        "Quantity": 2,
+        "OrderDate": "2024-01-15"
+      },
+      "DeliveryStatus": "Delivered",
+      "FeedbackRating": 4.5
+    }
+  }
+  
+}
